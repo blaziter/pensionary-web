@@ -86,3 +86,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+server/dist/models/index.js
+server/dist/models/Employee.js
+server/dist/index.js
