@@ -1,10 +1,17 @@
-import { sequelize } from ".";
+import { sequelize } from "./index";
 const { DataTypes } = require('sequelize');
 
-const Employee = sequelize.define("employees", {
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
+module.exports = sequelize.define("employees", {
+    firstName: {
+        type: DataTypes.STRING
+    },
+    lastName: {
+        type: DataTypes.STRING
+    },
+    role: {
+        type: DataTypes.STRING
+    },
+    availability: {
+        type: DataTypes.BOOLEAN
     }
-})
- 
+});

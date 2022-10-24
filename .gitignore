@@ -89,3 +89,6 @@ typings/
 server/dist/models/index.js
 server/dist/models/Employee.js
 server/dist/index.js
+server/dist/controllers/employees.js
+server/dist/models/User.js
+server/dist/routes/employees.js
