@@ -92,3 +92,5 @@ server/dist/index.js
 server/dist/controllers/employees.js
 server/dist/models/User.js
 server/dist/routes/employees.js
+server/dist/controllers/employee.js
+server/dist/routes/employee.js

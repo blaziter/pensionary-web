@@ -18,7 +18,8 @@ export const sequelize = new Sequelize(
 const Employee = require('./Employee');
 const User = require('./User');
 
-sequelize.sync({force: true}).then(() => {
+sequelize.sync().then(() => {
+    /*
     Employee.create({
         firstName: "Petr",
         lastName: "Tran",
@@ -37,7 +38,7 @@ sequelize.sync({force: true}).then(() => {
         username: "admin",
         password: "admin"
     });
-
+    */
 })
 
 sequelize.authenticate().then(() => {
