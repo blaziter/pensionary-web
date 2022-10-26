@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css";
 @import './components/layout/Layout.css';
 @import './components/login/Login.css';
@@ -17,12 +18,16 @@ code {
     monospace;
 }
 
+.root {
+  background-color: #f0f2f5 !important;
+}
+
 .align-center {
   margin: auto;
 }
 
 .font {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto Slab', serif;
   font-size: 36px !important;
   font-weight: 600 !important;
 }

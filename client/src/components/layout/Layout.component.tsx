@@ -9,7 +9,7 @@ interface Props {
 const Layout: FC<Props> = (props: Props) => {
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='layout-navbar'>
                 <Container fluid>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
