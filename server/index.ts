@@ -1,15 +1,14 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const sequelize = require('./models/index');
+const employeesRouter = require('./routes/employees');
 
 const app: Express = express();
 const port = process.env.PORT;
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Express');
-});
+app.use(employeesRouter);
 
-app.listen(port)
+app.listen(port);

@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 export const sequelize = new Sequelize(
     process.env.DB_NAME, 
@@ -26,16 +26,20 @@ sequelize.sync({force: true}).then(() => {
         availability: false
     });
 
+    Employee.create({
+        firstName: "Petr1",
+        lastName: "Tran1",
+        role: "Sestricka1",
+        availability: true
+    });
+
     User.create({
         username: "admin",
         password: "admin"
     });
-}).catch((error: any) => {
-    console.error(error);
-});
+
+})
 
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');
-}).catch((error: any) => {
-    console.error('Unable to connect to the database: ', error);
-});
+})
