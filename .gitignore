@@ -94,3 +94,10 @@ server/dist/models/User.js
 server/dist/routes/employees.js
 server/dist/controllers/employee.js
 server/dist/routes/employee.js
+server/dist/controllers/employee.controller.js
+server/dist/controllers/user.controller.js
+server/dist/models/employee.model.js
+server/dist/models/index.model.js
+server/dist/models/user.model.js
+server/dist/routes/employee.route.js
+server/dist/routes/user.route.js

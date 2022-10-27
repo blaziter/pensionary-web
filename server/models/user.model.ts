@@ -1,4 +1,4 @@
-import { sequelize } from "./index";
+import { sequelize } from "./index.model";
 const { DataTypes } = require('sequelize');
 
 module.exports = sequelize.define("users", {

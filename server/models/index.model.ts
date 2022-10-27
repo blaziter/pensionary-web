@@ -15,8 +15,8 @@ export const sequelize = new Sequelize(
     }
 )
 
-const Employee = require('./Employee');
-const User = require('./User');
+const Employee = require('./employee.model');
+const User = require('./user.model');
 
 sequelize.sync().then(() => {
     /*

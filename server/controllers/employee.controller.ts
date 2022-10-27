@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const Employee = require('../models/Employee');
+const Employee = require('../models/employee.model');
 
 exports.getEmployees = async (req: Request, res: Response) => {
     const employees = await Employee.findAll();
@@ -12,6 +12,11 @@ exports.getEmployee = async (req: Request, res: Response) => {
         where: {
             employeeId: req.params.employeeId
         }
-    })
+    });
+
+    if (!employee) {
+        res.status(404).send('No user was found');
+    }
+    
     res.status(201).send(employee);
 }
