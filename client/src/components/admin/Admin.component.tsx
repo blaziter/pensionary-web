@@ -1,12 +1,13 @@
 import React from "react";
-import { Layout } from '../../pages/Pages';
 
 const AdminComponent = () => {
 
     return (
-        <Layout>
+        <aside className='admin-sider'>
+            <div className='admin-sider-children'>
 
-        </Layout>
+            </div>
+        </aside>
     );
 }
 

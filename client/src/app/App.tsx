@@ -11,7 +11,9 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='admin' element={<Admin />} />
           <Route path='login' element={<Login />} />
-          <Route path='status' element={<Status />} />
+          <Route path='status' element={<Status />}>
+            <Route path='' element={<Status />} />
+          </Route>
         </Routes>
     </Provider>
   );

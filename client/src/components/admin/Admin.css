@@ -1,0 +1,17 @@
+.admin-sider {
+    background-color: #0D0D0D;
+    color: #fff !important;
+    min-width: 200px;
+    max-width: 200px;
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.admin-sider-children {
+    height: 100%;
+    width: 100%;
+}

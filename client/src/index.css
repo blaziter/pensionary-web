@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css";
 @import './components/layout/Layout.css';
+@import './components/admin/Admin.css';
 @import './components/login/Login.css';
 @import './components/home/Home.css';
 
