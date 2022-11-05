@@ -1,9 +1,7 @@
 .layout-navbar {
-    background-color: #fff !important;
+    background-color: #f7f7f7 !important;
 }
 
 .main-content {
-    background-color: #fff;
-    overflow: initial;
-    margin: 24px 16px 0;
+    background-color: #f7f7f7;
 }

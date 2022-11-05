@@ -14,12 +14,17 @@ const StaffStatus = () => {
     const [staff, setStaff] = useState([]);
 
     useEffect(() => {
+        let finished = false;
         axios.get(`${API_URL}/employees`)
             .then(async (res) => {
                 const data = await res.data;
                 await setStaff(data);
                 console.log(staff);
             });
+
+        return () => {
+            finished = true;
+        }
     }, [staff]);
 
     return (
@@ -34,7 +39,7 @@ const StaffStatus = () => {
                 <Row>
                     <Col>
                         {
-                            staff.length > 0 && staff.map((person: Employee) => {
+                            staff?.map((person: Employee) => {
                                 return (
                                     <>
                                         <Row>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from '../../pages/Pages';
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 
 const Home = () => {
 

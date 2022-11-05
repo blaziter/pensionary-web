@@ -9,7 +9,9 @@ const App = () => {
     <Provider store={store}>
         <Routes>
           <Route index element={<Home />} />
-          <Route path='admin' element={<Admin />} />
+          <Route path='admin' element={<Admin />}>
+            <Route path='database' element={<Admin />} />
+          </Route>
           <Route path='login' element={<Login />} />
           <Route path='status' element={<Status />}>
             <Route path='' element={<Status />} />

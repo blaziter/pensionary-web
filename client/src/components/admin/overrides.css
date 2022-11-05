@@ -1,0 +1,7 @@
+﻿a {
+  transition: all 0.2s;
+}
+.input, .textarea {
+  transition: all 0.2s;
+  box-shadow: none;
+}
