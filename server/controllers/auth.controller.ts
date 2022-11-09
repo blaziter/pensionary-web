@@ -24,7 +24,6 @@ export const adminLogin = (req: Request, res: Response) => {
             }
             
             result = bufferParser(result)     
-
             if (payload.password == result[0].PASSWORD) {
                 let jwtSecretKey = process.env.JWT_SECRET_KEY
                 let data = {
@@ -34,7 +33,7 @@ export const adminLogin = (req: Request, res: Response) => {
 
                 const token = jwt.sign(data, jwtSecretKey)
 
-                res.status(200).send('Login was successful')
+                res.status(200).send(token)
                 db.detach()
                 return
             }
