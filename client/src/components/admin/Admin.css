@@ -1,0 +1,15 @@
+.navbar {
+    background-color: #222e3c;
+    color: #fff;
+}
+
+.brand-text {
+    color: #fff;
+}
+
+.notification {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    position: relative;
+    padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+}

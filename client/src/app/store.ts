@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
+import getStaffReducer from '../common/features/getStaffSlice';
 
 export const store = configureStore({
   reducer: {
-
+    getStaff: getStaffReducer,
   },
 })
 
