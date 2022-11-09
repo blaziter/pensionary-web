@@ -1,17 +1,16 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
-const cors = require('cors');
+import authRouter from './routes/auth.route';
 
 dotenv.config();
-
-const sequelize = require('./models/index.model');
-const employeesRouter = require('./routes/employee.route');
 
 const app: Express = express();
 const port = process.env.PORT;
 
-app.use(cors());
+app.use(express.json());
 
-app.use('/api/employees', employeesRouter);
+app.use('/api/auth', authRouter)
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+});
