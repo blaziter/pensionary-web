@@ -1,9 +1,10 @@
 import express from 'express'
-import { adminLogin, validateUser } from '../controllers/auth.controller'
+import { adminLogin, logout } from '../controllers/auth.controller'
+import { authorization } from '../utils/authorization.utils'
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/login', adminLogin)
-router.get('validate', validateUser)
+router.post('/login', adminLogin);
+router.post('/logout', authorization, logout);
 
-export default router
+export default router;

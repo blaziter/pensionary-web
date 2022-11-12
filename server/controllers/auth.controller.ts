@@ -25,15 +25,16 @@ export const adminLogin = (req: Request, res: Response) => {
             
             result = bufferParser(result)     
             if (payload.password == result[0].PASSWORD) {
-                let jwtSecretKey = process.env.JWT_SECRET_KEY
                 let data = {
                     time: Date(),
                     userId: result[0].USERID
                 }
 
-                const token = jwt.sign(data, jwtSecretKey)
+                const token = jwt.sign(data, process.env.JWT_SECRET_KEY)
 
-                res.status(200).send(token)
+                res.status(200).cookie("token", token, {
+                    httpOnly: true
+                }).json("Logged in successfully")
                 db.detach()
                 return
             }
@@ -45,20 +46,6 @@ export const adminLogin = (req: Request, res: Response) => {
     });
 }
 
-export const validateUser = (req: Request, res: Response) => {
-    let tokenHeaderKey: any = process.env.TOKEN_HEADER_KEY;
-    let jwtSecretKey = process.env.JWT_SECRET_KEY;
-
-    try {
-        const token = req.header(tokenHeaderKey);
-        const verified = jwt.verify(token, jwtSecretKey);
-
-        if(verified){
-            return res.status(200).send("Successfully Verified");
-        }else{
-            return res.status(401).send("Verification was not successful");
-        }
-    } catch (error) {
-        return res.status(401).send(error);
-    }
+export const logout = (req: Request, res: Response) => {
+    res.clearCookie("token").status(200).json("Successfully logged out");
 }
