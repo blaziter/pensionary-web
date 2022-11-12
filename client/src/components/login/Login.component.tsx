@@ -10,7 +10,6 @@ export interface User {
 }
 
 const Login = () => {
-    const BASE_URL = "http://localhost:8080";
     const [user, setUser] = useState(
         {
             username: '',
@@ -24,8 +23,12 @@ const Login = () => {
 
     const LoginHandler = async (e: any) => {
         e.preventDefault();
-        await axios.post(`${BASE_URL}/api/login`, { payload: user })
-            .then()
+        await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { payload: user })
+            .then(
+                (res) => {
+                    console.log(res);
+                }
+            )
             .catch(e);
     }
 

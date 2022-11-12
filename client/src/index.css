@@ -1,9 +1,25 @@
+:root {
+    --primary-color: #222e3c;
+    --primary-text-color: #fff;
+    --secondary-color: #ffdd57;
+    --secondary-text-color: #363636;
+    --tertiary-color: #3298dc;
+    --quaternary-color: #f14668;
+    --essential-color: #fc427b;
+    --nav-hover-color: #19222c;
+    --white: #fff;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 @import './components/layout/Layout.css';
 @import './components/admin/Admin.css';
 @import './components/login/Login.css';
 @import './components/home/Home.css';
+
+html {
+  overflow-y: hidden;
+}
 
 body {
   margin: 0;

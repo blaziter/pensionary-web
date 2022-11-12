@@ -7,9 +7,10 @@ interface IOptions {
     user: string,
     password: string,
     lowercase_keys: boolean,
-    role: any,
+    role: string,
     pageSize: number,
     retryConnectionInterval: number,
+    blobAsText: boolean,
 }
 
 export const options: IOptions = {
@@ -22,6 +23,7 @@ export const options: IOptions = {
     role: 'RDB$ADMIN',
     pageSize: 4096,
     retryConnectionInterval: 1000,
+    blobAsText: false,
 }
 
 /*
