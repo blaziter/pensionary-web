@@ -1,0 +1,10 @@
+.dashboard-tile-child {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    max-height: 105px;
+    min-width: 367.45px;
+}
+
+.dashboard-tile:hover {
+    cursor: pointer;
+}

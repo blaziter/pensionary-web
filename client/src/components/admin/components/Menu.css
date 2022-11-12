@@ -1,0 +1,33 @@
+.menu-item {
+    text-decoration: none;
+    user-select: none;
+    transition: all 0.3s;
+}
+
+.menu-item:hover {
+    transition: all 0.3s !important;
+}
+
+.menu-disabled {
+    text-decoration: none;
+    cursor: default;
+    user-select: none;
+    transition: all 0.3s;
+}
+
+.menu-disabled:hover {
+    background-color: var(--white) !important;
+    text-decoration: none;
+    cursor: default;
+    user-select: none;
+    transition: all 0.3s;
+}
+
+.active {
+    color: var(--white) !important;
+    background-color: var(--essential-color) !important;
+}
+
+.user-select-none {
+    user-select: none;
+}

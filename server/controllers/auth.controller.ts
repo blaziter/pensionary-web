@@ -23,7 +23,8 @@ export const adminLogin = (req: Request, res: Response) => {
                 return
             }
             
-            result = bufferParser(result)     
+            result = bufferParser(result)
+            console.log(result);
             if (payload.password == result[0].PASSWORD) {
                 let data = {
                     time: Date(),
