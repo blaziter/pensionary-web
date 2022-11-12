@@ -16,9 +16,12 @@
     min-height: 52px;
     user-select: none;
     transition: all 0.3s;
+    text-decoration: none;
+    color: var(--white)
 }
 
 .admin-brand:hover {
+    color: var(--white);
     background-color: var(--nav-hover-color);
     user-select: none;
     cursor: pointer;
@@ -61,4 +64,10 @@
     transition: all 0.3s;
     border-bottom: 3px solid transparent;
     outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    ul.menu-list {
+        padding: 0 !important;
+    }
 }

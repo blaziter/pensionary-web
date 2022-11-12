@@ -7,16 +7,9 @@ const Nav = () => {
     return (
         <>
             <div className='navbar admin-navbar'>
-                <div className="admin-brand">
-                    <div className="admin-brand-item">
-                        Zdravotně sociální služby Turnov
-                    </div>
-                    <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true" />
-                        <span aria-hidden="true" />
-                        <span aria-hidden="true" />
-                    </a>
-                </div>
+                <Link className="admin-brand" to='/admin'>
+                    Zdravotně sociální služby Turnov
+                </Link>
                 <div className="navbar-start">
                     <NavLink className="admin-item" to='/admin'>
                         Home
