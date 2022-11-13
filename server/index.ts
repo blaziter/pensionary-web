@@ -1,6 +1,7 @@
 import express, { Express, Request } from 'express';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.route';
+import employeeRouter from './routes/employee.route';
 
 const cookieParser = require('cookie-parser');
 import cors = require('cors');
@@ -15,6 +16,7 @@ app.use(cookieParser());
 
 //ROUTES
 app.use('/api/auth', authRouter);
+app.use('/api', employeeRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
