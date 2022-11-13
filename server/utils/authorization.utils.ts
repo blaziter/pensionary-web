@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 const jwt = require('jsonwebtoken');
 
-export const authorization = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.cookies.access_token;
+export const authentication = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies.token;
     if (!token) {
-      res.status(403);
+      return res.status(403).json('No token');
     }
     try {
       const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
