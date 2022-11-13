@@ -2,6 +2,7 @@
     background-color: var(--primary-color);
     color: var(--white);
     width: 100vw;
+    max-height: 52px;
 }
 
 .brand-text {
@@ -16,7 +17,8 @@
 }
 
 .admin-layout {
-    min-height: 90vh;
+    min-height: calc(100vh - 52px);
+    background-color: var(--white);
 }
 
 .tile-max-width {
@@ -25,4 +27,10 @@
 
 .center-tile {
     justify-content: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .section {
+        padding: 3rem 1.5rem !important;
+    }
 }

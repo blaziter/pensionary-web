@@ -14,7 +14,7 @@ interface IOptions {
 }
 
 export const options: IOptions = {
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 3050,
     database: 'C:/Program Files/Firebird/Firebird_2_5/DUCHODAK.FDB',
     user: 'vofrk',

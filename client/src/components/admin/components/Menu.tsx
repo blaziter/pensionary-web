@@ -1,41 +1,35 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { ImStatsBars } from "react-icons/im";
+import { GrUserAdmin } from "react-icons/gr";
+import { BiPlusMedical } from "react-icons/bi";
+import { GiMedicines } from "react-icons/gi";
+import { MdElderly } from "react-icons/md";
 
 const Menu = () => {
 
     return (
         <>
-            <aside className="menu">
+            <aside className="menu user-select-none">
                 <p className="menu-label">
-                    General
+                    Obecné
                 </p>
                 <ul className="menu-list">
-                    <li><a>Dashboard</a></li>
-                    <li><a>Customers</a></li>
+                    <li><NavLink className='menu-item' to='/admin'><ImStatsBars /> Přehled</NavLink></li>
                 </ul>
                 <p className="menu-label">
-                    Administration
+                    Správa
                 </p>
                 <ul className="menu-list">
-                    <li><a>Team Settings</a></li>
+                    <li><NavLink className='menu-item' to='/admin/admins'><GrUserAdmin /> Správci</NavLink></li>
                     <li>
-                        <a className="is-active">Manage Your Team</a>
+                        <a className='menu-disabled'>Lékařský tým</a>
                         <ul>
-                            <li><a>Members</a></li>
-                            <li><a>Plugins</a></li>
-                            <li><a>Add a member</a></li>
+                            <li><NavLink className='menu-item' to='/admin/doctors'><BiPlusMedical /> Lékaři</NavLink></li>
+                            <li><NavLink className='menu-item' to='/admin/nurses'><GiMedicines /> Sestřičky</NavLink></li>
+                            <li><NavLink className='menu-item' to='/admin/residents'><MdElderly /> Důchodci</NavLink></li>
                         </ul>
                     </li>
-                    <li><a>Invitations</a></li>
-                    <li><a>Cloud Storage Environment Settings</a></li>
-                    <li><a>Authentication</a></li>
-                </ul>
-                <p className="menu-label">
-                    Transactions
-                </p>
-                <ul className="menu-list">
-                    <li><a>Payments</a></li>
-                    <li><a>Transfers</a></li>
-                    <li><a>Balance</a></li>
                 </ul>
             </aside>
 
