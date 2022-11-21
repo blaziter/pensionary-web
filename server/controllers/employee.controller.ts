@@ -34,10 +34,40 @@ export const newEmployee = (req: Request, res: Response) => {
             if (err) {
                 console.log(err);
                 db.detach();
+                return res.status(400).send('Something went wrong');
             }
 
             res.status(200).send('User created successfully');
             db.detach();
         })
     })
+}
+
+export const updateEmployee = (req: Request, res: Response) => {
+
+}
+
+export const deleteEmployee = (req: Request, res: Response) => {
+    let { employeeId } = req.body;
+
+    if (!employeeId) {
+        return res.status(400).send('Missing employee uuid');
+    }
+
+    console.log(employeeId);
+
+    Firebird.attach(options, (err, db) => {
+        if (err) throw err;
+    
+        db.query('DELETE FROM employee WHERE EMPLOYEEID = ?', [employeeId], (err, result) => {
+            if (err) {
+                console.log(err);
+                db.detach();
+                return res.status(400).send('Something went wrong');
+            }
+
+            res.status(200).send('User deleted successfully');
+            db.detach();
+        });
+    });
 }
