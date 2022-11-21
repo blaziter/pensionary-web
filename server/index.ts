@@ -16,7 +16,7 @@ app.use(cookieParser());
 
 //ROUTES
 app.use('/api/auth', authRouter);
-app.use('/api', employeeRouter);
+app.use('/api/employee', employeeRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
