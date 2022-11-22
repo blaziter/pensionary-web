@@ -44,7 +44,29 @@ export const newEmployee = (req: Request, res: Response) => {
 }
 
 export const updateEmployee = (req: Request, res: Response) => {
+    const data = req.body;
+    let user;
 
+    if (!data) return res.status(400).send('Missing data');
+
+    Firebird.attach(options, (err, db) => {
+        if (err) throw err;
+    
+        db.query('SELECT * FROM employee WHERE employeeId = ?', [data.employeeId], (err, result) => {
+            if (err) return res.status(400).send('Unknown user');
+
+            user = bufferParser(result);
+            db.detach();
+
+            //This is definetly woodoo, need to fix, dont know how :(
+            user[0].AVAILABILITY = data?.availability;
+            user[0].NAME = data?.name;
+            user[0].PREFFIX = data?.prefix;
+            user[0].SUFFIX = data?.suffix;
+            user[0].ROLE = data?.role;
+            console.log(user)
+        });
+    });
 }
 
 export const deleteEmployee = (req: Request, res: Response) => {
