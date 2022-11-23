@@ -32,6 +32,7 @@ export const adminLogin = (req: Request, res: Response) => {
                 }
 
                 const token = jwt.sign(data, process.env.JWT_SECRET_KEY)
+                req.session.loggedIn = true;
 
                 res.status(200).cookie("token", token, {
                     httpOnly: true

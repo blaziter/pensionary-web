@@ -1,11 +1,13 @@
 import express from 'express';
 import { adminLogin, authorization, logout } from '../controllers/auth.controller';
 import { authentication } from '../middleware/authorization.middleware';
+import { isLoggedIn } from '../middleware/loggedIn.middleware';
+import { isLoggedOut } from '../middleware/loggedOut.middleware';
 
 const router = express.Router();
 
-router.post('/login', adminLogin);
-router.post('/logout', authentication, logout);
-router.post('/verify', authorization);
+router.post('/login', isLoggedOut, adminLogin);
+router.post('/logout', authentication, isLoggedIn, logout);
+router.post('/verify', isLoggedIn, authorization);
 
 export default router;
