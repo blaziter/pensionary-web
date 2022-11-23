@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { Login, Status, Home, Admin } from '../pages/Pages';
+import { Login, Status, Home, Admin, Table } from '../pages/Pages';
 import { store } from './store';
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
           <Route path='admin' element={<Admin />}>
             <Route path='database' element={<Admin />} />
           </Route>
+          <Route path='/admin/:role' element={<Table />} />
           <Route path='login' element={<Login />} />
           <Route path='status' element={<Status />}>
             <Route path='' element={<Status />} />
