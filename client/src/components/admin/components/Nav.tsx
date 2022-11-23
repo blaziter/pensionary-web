@@ -16,7 +16,7 @@ const Nav = () => {
                     </NavLink>
                 </div>
                 <div className="navbar-end">
-                    <div className='dropdown is-right is-active'>
+                    <div className='dropdown is-right is-active user-menu'>
                         <div className='dropdown-trigger'>
                             <button className='button' aria-haspopup='true' aria-controls='dropdown-menu4'>
                                 <span>Admin</span>
@@ -25,7 +25,7 @@ const Nav = () => {
                                 </span>
                             </button>
                         </div>
-                        <div className="dropdown-menu" id="dropdown-menu4" role="menu">
+                        <div className="dropdown-menu user-menu-active" id="dropdown-menu4" role="menu">
                             <div className="dropdown-content">
                                 <div className="dropdown-item">
                                     <a href='http://localhost:8080/api/auth/logout' className="dropdown-item">

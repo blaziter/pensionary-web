@@ -21,13 +21,13 @@ const Menu = () => {
                     Správa
                 </p>
                 <ul className="menu-list">
-                    <li><NavLink className='menu-item' to='/admin/admins'><GrUserAdmin /> Správci</NavLink></li>
+                    <li><NavLink className='menu-item' to='/admin/admin'><GrUserAdmin /> Správci</NavLink></li>
                     <li>
                         <a className='menu-disabled'>Lékařský tým</a>
                         <ul>
-                            <li><NavLink className='menu-item' to='/admin/doctors'><BiPlusMedical /> Lékaři</NavLink></li>
-                            <li><NavLink className='menu-item' to='/admin/nurses'><GiMedicines /> Sestřičky</NavLink></li>
-                            <li><NavLink className='menu-item' to='/admin/residents'><MdElderly /> Důchodci</NavLink></li>
+                            <li><NavLink className='menu-item' to='/admin/doctor'><BiPlusMedical /> Lékaři</NavLink></li>
+                            <li><NavLink className='menu-item' to='/admin/nurse'><GiMedicines /> Sestřičky</NavLink></li>
+                            <li><NavLink className='menu-item' to='/admin/resident'><MdElderly /> Důchodci</NavLink></li>
                         </ul>
                     </li>
                 </ul>

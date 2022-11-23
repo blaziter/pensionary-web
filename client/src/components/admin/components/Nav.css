@@ -66,6 +66,14 @@
     outline: none;
 }
 
+.user-menu {
+    padding-right: 24px;
+}
+
+.user-menu-active {
+    right: 24px !important;
+}
+
 @media screen and (max-width: 768px) {
     ul.menu-list {
         padding: 0 !important;
