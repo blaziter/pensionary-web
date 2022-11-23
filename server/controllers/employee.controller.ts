@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Firebird from 'node-firebird';
 import { options } from "../db.connector";
 import { Employee } from "../models/employee.model";
-import bufferParser from "../utils/bufferParser.utils";
+import bufferParser from "../middleware/bufferParser.middleware";
 import { v4 as uuidv4 } from 'uuid';
 
 export const getAllEmployees = (req: Request, res: Response) => {
@@ -56,15 +56,23 @@ export const updateEmployee = (req: Request, res: Response) => {
             if (err) return res.status(400).send('Unknown user');
 
             user = bufferParser(result);
-            db.detach();
 
             //This is definetly woodoo, need to fix, dont know how :(
-            user[0].AVAILABILITY = data?.availability;
-            user[0].NAME = data?.name;
-            user[0].PREFFIX = data?.prefix;
-            user[0].SUFFIX = data?.suffix;
-            user[0].ROLE = data?.role;
-            console.log(user)
+            if (data.availability) user[0].AVAILABILITY = data.availability;
+            if (data.name) user[0].NAME = data?.name;
+            if (data.preffix) user[0].PREFFIX = data?.preffix;
+            if (data.suffix) user[0].SUFFIX = data?.suffix;
+            if (data.role) user[0].ROLE = data?.role;
+            
+            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, preffix = ?, suffix = ?, role = ? WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFFIX, user[0].SUFFIX, user[0].ROLE, data.employeeId], (err: string) => {
+                if (err) {
+                    console.log(err);
+                    db.detach();
+                    return res.status(400).send('Update failed');
+                }
+                db.detach();
+                return res.status(200).send('Edit was successfull')
+            })
         });
     });
 }

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Firebird from 'node-firebird';
 import { options } from "../db.connector";
-import bufferParser from "../utils/bufferParser.utils";
+import bufferParser from "../middleware/bufferParser.middleware";
 const jwt = require('jsonwebtoken')
 
 export const adminLogin = (req: Request, res: Response) => {

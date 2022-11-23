@@ -5,6 +5,7 @@ import employeeRouter from './routes/employee.route';
 
 const cookieParser = require('cookie-parser');
 import cors = require('cors');
+import { authentication } from './middleware/authorization.middleware';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.use(cookieParser());
 
 //ROUTES
 app.use('/api/auth', authRouter);
+
+app.use(authentication);
 app.use('/api/employee', employeeRouter);
 
 app.listen(port, () => {
