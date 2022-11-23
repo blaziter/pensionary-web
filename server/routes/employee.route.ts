@@ -1,9 +1,10 @@
 import express from 'express';
-import { deleteEmployee, getAllEmployees, newEmployee, updateEmployee } from '../controllers/employee.controller';
+import { deleteEmployee, getAllEmployees, getEmployeeByRole, newEmployee, updateEmployee } from '../controllers/employee.controller';
 
 const router = express.Router();
 
 router.get('/all', getAllEmployees);
+router.get('/:role', getEmployeeByRole)
 router.post('/new', newEmployee);
 router.put('/:employeeId/edit', updateEmployee);
 router.delete('/:employeeId/delete', deleteEmployee);
