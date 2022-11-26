@@ -30,7 +30,7 @@ export const newEmployee = (req: Request, res: Response) => {
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
 
-        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFFIX, NAME, ROLE, AVAILABILITY) VALUES (?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.prefix, employee.name, employee.role, employee.availability], (err, result) => {
+        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.prefix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
             if (err) {
                 console.log(err);
                 db.detach();
@@ -63,8 +63,10 @@ export const updateEmployee = (req: Request, res: Response) => {
             if (data.preffix) user[0].PREFFIX = data?.preffix;
             if (data.suffix) user[0].SUFFIX = data?.suffix;
             if (data.role) user[0].ROLE = data?.role;
+            if (data.shift) user[0].SHIFT = data?.shift;
+            if (data.workplace) user[0].WORKPLACE = data?.workplace;
             
-            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, preffix = ?, suffix = ?, role = ? WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFFIX, user[0].SUFFIX, user[0].ROLE, data.employeeId], (err: string) => {
+            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, preffix = ?, suffix = ?, role = ?, shift = ?, workplace = ?, WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFFIX, user[0].SUFFIX, user[0].ROLE, user[0].SHIFT, user[0].WORKPLACE, data.employeeId], (err: string) => {
                 if (err) {
                     console.log(err);
                     db.detach();
@@ -113,6 +115,46 @@ export const getEmployeeByRole = (req: Request, res: Response) => {
                 console.log(err);
                 db.detach();
                 return res.status(404).send('Selected role doesnt exist');
+            }
+
+            result = bufferParser(result);
+            res.status(200).send(result);
+            db.detach();
+        });
+    });
+}
+
+export const getEmployeeByShift = (req: Request, res: Response) => {
+    const paramsData = req.params;
+
+    Firebird.attach(options, (err, db) => {
+        if (err) throw err;
+    
+        db.query('SELECT * FROM employee WHERE shift = ?', [paramsData.shift], (err, result) => {
+            if (err) {
+                console.log(err);
+                db.detach();
+                return res.status(404).send('Selected shift doesnt exist');
+            }
+
+            result = bufferParser(result);
+            res.status(200).send(result);
+            db.detach();
+        });
+    });
+}
+
+export const getEmployeeByWorkplace = (req: Request, res: Response) => {
+    const paramsData = req.params;
+
+    Firebird.attach(options, (err, db) => {
+        if (err) throw err;
+    
+        db.query('SELECT * FROM employee WHERE workplace = ?', [paramsData.workplace], (err, result) => {
+            if (err) {
+                console.log(err);
+                db.detach();
+                return res.status(404).send('Selected workplace doesnt exist');
             }
 
             result = bufferParser(result);

@@ -4,5 +4,7 @@ export interface Employee {
     prefix:string,
     name: string,
     role: string,
-    availability: number
+    availability: number,
+    shift: string,
+    workplace: string
 }
