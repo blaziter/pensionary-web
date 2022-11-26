@@ -1,0 +1,18 @@
+.button-holder {
+    display: flex;
+    justify-content: flex-start;
+    max-height: 40px;
+}
+
+.admin-edit {
+    color: var(--white) !important;
+    background-color: var(--essential-color);
+    padding: 0 11px !important;
+}
+
+.admin-value {
+    margin-bottom: 0px;
+    height: 40.5px;
+    display: flex;
+    align-items: center;
+}

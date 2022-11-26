@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+.dashboard-tile {
+    justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
     ul.menu-list {
         padding: 0 !important;

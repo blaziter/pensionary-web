@@ -11,10 +11,9 @@ const Dashboard = () => {
                 
             </nav>
             <div className='tile is-ancestor has-text-centered align-items-center'>
-                <Tile onClick={() => navigate('/admin/doctors')} title='Lékaři' subtitle={0} />
-                <Tile onClick={() => navigate('/admin/nurses')} title='Sestřičky' subtitle={0}/>
-                <Tile onClick={() => navigate('/admin/residents')} title='Důchodci' subtitle={0}/>
-                <Tile onClick={() => navigate('s')} title='Lékaři' subtitle={0}/>
+                <Tile onClick={() => navigate('/table/doctor')} title='Lékaři' subtitle={0} />
+                <Tile onClick={() => navigate('/table/nurse')} title='Sestřičky' subtitle={0}/>
+                <Tile onClick={() => navigate('/table/admin')} title='Správci' subtitle={0}/>
             </div>
         </>
     );

@@ -4,7 +4,6 @@ import { ImStatsBars } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
 import { BiPlusMedical } from "react-icons/bi";
 import { GiMedicines } from "react-icons/gi";
-import { MdElderly } from "react-icons/md";
 
 const Menu = () => {
 
@@ -21,13 +20,12 @@ const Menu = () => {
                     Správa
                 </p>
                 <ul className="menu-list">
-                    <li><NavLink className='menu-item' to='/admin/admin'><GrUserAdmin /> Správci</NavLink></li>
+                    <li><NavLink className='menu-item' to='/table/admin'><GrUserAdmin /> Správci</NavLink></li>
                     <li>
                         <a className='menu-disabled'>Lékařský tým</a>
                         <ul>
-                            <li><NavLink className='menu-item' to='/admin/doctor'><BiPlusMedical /> Lékaři</NavLink></li>
-                            <li><NavLink className='menu-item' to='/admin/nurse'><GiMedicines /> Sestřičky</NavLink></li>
-                            <li><NavLink className='menu-item' to='/admin/resident'><MdElderly /> Důchodci</NavLink></li>
+                            <li><NavLink className='menu-item' to='/table/doctor'><BiPlusMedical /> Lékaři</NavLink></li>
+                            <li><NavLink className='menu-item' to='/table/nurse'><GiMedicines /> Sestřičky</NavLink></li>
                         </ul>
                     </li>
                 </ul>

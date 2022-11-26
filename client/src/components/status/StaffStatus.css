@@ -1,4 +1,103 @@
+#root:has(> .info-container) {
+    background-color: #feecf0;
+    overflow: auto;
+}
+
 .info-container {
-    background-color:aliceblue;
-    height: 100vh;
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    flex-direction: column;
+}
+
+.date-holder {
+    font-size: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.date {
+    padding: 0 20px;
+}
+
+.time {
+    min-width: 450px;
+    max-width: 500px;
+    width: fit-content;
+}
+
+.employee {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.employee-text {
+}
+
+.general-nurse-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.message-header {
+    font-size: 6rem;
+    justify-content: space-evenly;
+    padding: 0.25em 0.5em;
+}
+
+.message-body {
+    font-size: 5rem;
+    justify-content: space;
+    padding: 0.5em 0.75em;
+    align-items: center;
+}
+
+.message {
+    border-bottom: 0.7em solid #0d0d0d;
+}
+
+.employee-text.available {
+    color: #48c78e;
+}
+
+.employee-text.unavailable {
+    color: #f14668;
+}
+
+.general-nurse-info {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.night {
+    align-self: stretch;
+}
+
+.switch-routes {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#root > div > div.containers.ground-floor > article {
+    border: 0;
+}
+
+#root > div > article.footer {
+    border-radius: 0 !important;
+    border: 0 !important;
+    margin-top: auto;
+    border-top: 0.7em solid #0d0d0d !important;
+}
+
+#root > div > article.footer > div {
+    border-radius: 0 !important;
+    border-style: none !important;
+    border: 0 !important;
 }

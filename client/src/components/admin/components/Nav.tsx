@@ -1,8 +1,14 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+
+    /*const logOut = () => {
+        axios.defaults.withCredentials = true;
+        axios.post(`${process.env.REACT_APP_API_URL}/auth/logout`, { withCredentials: true })
+    }*/
 
     return (
         <>
@@ -28,7 +34,7 @@ const Nav = () => {
                         <div className="dropdown-menu user-menu-active" id="dropdown-menu4" role="menu">
                             <div className="dropdown-content">
                                 <div className="dropdown-item">
-                                    <a href='http://localhost:8080/api/auth/logout' className="dropdown-item">
+                                    <a href={`${process.env.REACT_APP_API_URL}/auth/logout`} className="dropdown-item">
                                         Log Out
                                     </a>
                                 </div>
