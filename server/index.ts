@@ -29,8 +29,8 @@ app.use('/api/announcement', announcementRouter);
 
 app.use('/api/auth', authRouter);
 
-//app.use(authentication);
-//app.use(isLoggedIn);
+app.use(authentication);
+app.use(isLoggedIn);
 
 app.use('/api/employee', employeeRouter);
 
