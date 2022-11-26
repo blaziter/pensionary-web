@@ -21,8 +21,6 @@ export const newEmployee = (req: Request, res: Response) => {
     let employee = req.body as Employee;
     employee.employeeId = uuidv4();
 
-    console.log(employee);
-
     if (!employee.name || !employee.role) {
         return res.status(400).send('Missing parameters!')
     }
@@ -45,6 +43,7 @@ export const newEmployee = (req: Request, res: Response) => {
 
 export const updateEmployee = (req: Request, res: Response) => {
     const data = req.body;
+    const { employeeId } = req.params;
     let user;
 
     if (!data) return res.status(400).send('Missing data');
@@ -52,7 +51,7 @@ export const updateEmployee = (req: Request, res: Response) => {
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
     
-        db.query('SELECT * FROM employee WHERE employeeId = ?', [data.employeeId], (err, result) => {
+        db.query('SELECT * FROM employee WHERE employeeId = ?', [employeeId], (err, result) => {
             if (err) return res.status(400).send('Unknown user');
 
             user = bufferParser(result);
@@ -66,7 +65,7 @@ export const updateEmployee = (req: Request, res: Response) => {
             if (data.shift) user[0].SHIFT = data?.shift;
             if (data.workplace) user[0].WORKPLACE = data?.workplace;
             
-            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, preffix = ?, suffix = ?, role = ?, shift = ?, workplace = ?, WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFFIX, user[0].SUFFIX, user[0].ROLE, user[0].SHIFT, user[0].WORKPLACE, data.employeeId], (err: string) => {
+            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, preffix = ?, suffix = ?, role = ?, shift = ?, workplace = ?, WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFFIX, user[0].SUFFIX, user[0].ROLE, user[0].SHIFT, user[0].WORKPLACE, employeeId], (err: string) => {
                 if (err) {
                     console.log(err);
                     db.detach();
@@ -80,7 +79,7 @@ export const updateEmployee = (req: Request, res: Response) => {
 }
 
 export const deleteEmployee = (req: Request, res: Response) => {
-    let { employeeId } = req.body;
+    let { employeeId } = req.params;
 
     if (!employeeId) {
         return res.status(400).send('Missing employee uuid');

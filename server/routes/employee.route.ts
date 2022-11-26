@@ -5,7 +5,7 @@ const router = express.Router();
 
 //GET
 router.get('/all', getAllEmployees);
-router.get('/:role', getEmployeeByRole)
+router.get('/:role', getEmployeeByRole);
 router.get('/:shift', getEmployeeByShift);
 router.get('/:workplace', getEmployeeByWorkplace);
 
