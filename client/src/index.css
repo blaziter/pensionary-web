@@ -19,6 +19,7 @@
 @import './components/admin/components/Nav.css';
 @import './components/status/StaffStatus.css';
 @import './components/events/Events.css';
+@import './components/footer/Footer.css';
 @import './components/layout/Layout.css';
 @import './components/admin/Admin.css';
 @import './components/login/Login.css';

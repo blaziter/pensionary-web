@@ -1,0 +1,50 @@
+#root:has(> .info-container) {
+    overflow: auto;
+}
+
+.info-container {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    flex-direction: column;
+}
+
+.info-title {
+    font-size: 7rem;
+}
+
+.info-container.footer {
+    margin-top: auto;
+}
+
+.info-card-image {
+    min-width: 365px;
+    min-height: 365px;
+    max-width: 365px;
+    max-height: 365px;
+}
+
+.info-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: stretch;
+}
+
+.info-card-title {
+    font-size: 6rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.info-card-subtitle {
+    font-size: 5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.info-container.footer {
+    border-top: 0;
+}

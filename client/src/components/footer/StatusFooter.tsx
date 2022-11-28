@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const StatusFooter = () => {
     return (
         <>
-            <article className='footer message is-success'>
+            <article className='status-footer message is-success'>
                 <div className='message-body'>
                     <div className='switch-routes'>Pro zobrazení informací klikněte na tlačítko <Link to='/info'><BsFillInfoCircleFill size='96px' /></Link></div>
                     <div className='switch-routes'>Pro zobrazení událostí klikněte na tlačítko <Link to='/events'><BsFillInfoCircleFill size='96px' /></Link></div>
-                    <p>Vývojáři: <a href=''>Petr Tran</a> <a href=''>Štefan Jambrich</a></p>
+                    <p>Vývojáři: <a href='https://github.com/blaziter'>Petr Tran</a> <a href='https://github.com/bouchlavarna'>Štefan Jambrich</a></p>
                 </div>
             </article>
         </>

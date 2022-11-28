@@ -1,0 +1,20 @@
+.switch-routes {
+    margin-bottom: 0.5em;
+}
+
+#root > div > article.status-footer, #root > div > article.event-footer {
+    border-radius: 0 !important;
+    border: 0 !important;
+    margin-top: auto;
+    border-top: 0.7em solid #0d0d0d !important;
+}
+
+#root > div > article.status-footer > div, #root > div > article.event-footer > div {
+    border-radius: 0 !important;
+    border-style: none !important;
+    border: 0 !important;
+}
+
+#root > div > article > div {
+    border-width: 0 !important;
+}

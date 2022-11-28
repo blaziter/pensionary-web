@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsCheckLg, BsFillInfoCircleFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import StatusFooter from '../footer/StatusFooter';
 
 interface Employee {
@@ -60,7 +59,7 @@ const StaffStatus = () => {
 
     return (
         <>
-            <div className='info-container has-text-centered font'>
+            <div className='status-container has-text-centered font'>
                 <div className='containers directors-container'>
                     <article className='message is-danger'>
                         <div className='message-header'>

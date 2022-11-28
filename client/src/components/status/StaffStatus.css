@@ -1,9 +1,9 @@
-#root:has(> .info-container) {
+#root:has(> .status-container) {
     background-color: #feecf0;
     overflow: auto;
 }
 
-.info-container {
+.status-container {
     display: flex;
     min-height: 100vh;
     min-width: 100vw;
@@ -87,17 +87,4 @@
 
 #root > div > div.containers.ground-floor > article {
     border: 0;
-}
-
-#root > div > article.footer {
-    border-radius: 0 !important;
-    border: 0 !important;
-    margin-top: auto;
-    border-top: 0.7em solid #0d0d0d !important;
-}
-
-#root > div > article.footer > div {
-    border-radius: 0 !important;
-    border-style: none !important;
-    border: 0 !important;
 }

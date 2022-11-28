@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const EventFooter = () => {
     return (
         <>
-            <article className='footer message is-success'>
+            <article className='event-footer message is-success'>
                 <div className='message-body'>
                     <div className='switch-routes'>Pro zobrazení informací klikněte na tlačítko <Link to='/info'><BsFillInfoCircleFill size='96px' /></Link></div>
                     <div className='switch-routes'>Pro zobrazení seznamu sestřiček klikněte na tlačítko <Link to='/status'><BsFillInfoCircleFill size='96px' /></Link></div>
