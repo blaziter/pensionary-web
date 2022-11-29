@@ -1,10 +1,11 @@
+import React, { forwardRef } from 'react';
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const EventFooter = () => {
+const EventFooter = React.forwardRef<HTMLElement>((props, ref) => {
     return (
         <>
-            <article className='event-footer message is-success'>
+            <article ref={ref} className='event-footer message is-success'>
                 <div className='message-body'>
                     <div className='switch-routes'>Pro zobrazení informací klikněte na tlačítko <Link to='/info'><BsFillInfoCircleFill size='96px' /></Link></div>
                     <div className='switch-routes'>Pro zobrazení seznamu sestřiček klikněte na tlačítko <Link to='/status'><BsFillInfoCircleFill size='96px' /></Link></div>
@@ -13,6 +14,6 @@ const EventFooter = () => {
             </article>
         </>
     );
-}
+});
 
 export default EventFooter;

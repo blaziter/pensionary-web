@@ -84,6 +84,9 @@ typings/
 # FuseBox cache
 .fusebox/
 
+# .idea folder
+.idea
+
 # DynamoDB Local files
 .dynamodb/
 server/dist/models/index.js
