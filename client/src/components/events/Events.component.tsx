@@ -13,12 +13,18 @@ interface annoucement {
 const Events = () => {
     const [events, setEvents] = useState([]);
     const [direction, setDirection] = useState(false);
+    const [reachedBottom, setReachedBottom] = useState(false);
     const header = useRef<HTMLElement>(null);
     const footer = useRef<HTMLElement>(null);
 
     const scrollFooter = () => {
         footer.current?.scrollIntoView({behavior: 'smooth'});
+        setReachedBottom(true);
     }
+
+    useEffect(() => {
+        
+    }, [reachedBottom])
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/events`)
