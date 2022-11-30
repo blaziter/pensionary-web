@@ -9,6 +9,8 @@ interface IScroll {
 
 const Scroll = ({ className, click }: IScroll) => {
 
+    //style={{ display: 'none'}}
+
     return (
         <>
             {
@@ -17,7 +19,7 @@ const Scroll = ({ className, click }: IScroll) => {
                         <AiFillCaretUp />
                     </button>
                     :
-                    <button className={`button ${className}`} id='down' onClick={click} style={{ display: 'none'}}>
+                    <button className={`button ${className}`} id='down' onClick={click} >
                         <AiFillCaretDown size={128} />
                     </button>
             }
