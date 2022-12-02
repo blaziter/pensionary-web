@@ -244,11 +244,12 @@ const StaffStatus = () => {
 /* * headmasters
 {
     staff.map(employee => {
+        let names = employee.name.split(' ');
         return (
             <>
                 <div className='employee'>
                     <p className='employee-text'>{employee.role}</p>
-                    <p className='employee-text'>{employee.prefix} {employee.firstName.charAt(0)}. {employee.lastName} {employee.suffix}</p>
+                    <p className='employee-text'>{employee.prefix} {names[0].charAt(0). names[1]} {employee.suffix}</p>
                     <p className={employee.availability ? 'employee-text available' : 'employee-text unavailable'}>{employee.availability ? 'Dostupný' : 'Nedostupný'}</p> {employee.availability ? <BsCheckLg className='employee-text available' size='1.5em' /> : null}
                 </div>
             </>

@@ -1,6 +1,7 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "1.5.5",
+  "description": "UI for pensionary",
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {

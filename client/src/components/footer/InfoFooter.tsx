@@ -8,7 +8,7 @@ const InfoFooter = () => {
                 <div className='message-body'>
                     <div className='switch-routes'>Pro zobrazení seznamu sestřiček klikněte na tlačítko <Link to='/status'><BsFillInfoCircleFill size='96px' /></Link></div>
                     <div className='switch-routes'>Pro zobrazení událostí klikněte na tlačítko <Link to='/events'><BsFillInfoCircleFill size='96px' /></Link></div>
-                    <p>Vývojáři: <a href=''>Petr Tran</a> <a href=''>Štefan Jambrich</a></p>
+                    <p>Vývojáři: <a href='https://github.com/blaziter'>Petr Tran</a> <a href='https://github.com/bouchlavarna'>Štefan Jambrich</a></p>
                 </div>
             </article>
         </>
