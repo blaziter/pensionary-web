@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRef, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import EventFooter from "../footer/EventFooter";
 import Card from "../info/components/Card";
 import Scroll from "../scroll/Scroll";
@@ -16,15 +17,23 @@ const Events = () => {
     const [reachedBottom, setReachedBottom] = useState(false);
     const header = useRef<HTMLElement>(null);
     const footer = useRef<HTMLElement>(null);
+    const max = 30;
+    const [time, setTime] = useState(30);
+    const [change, setChange] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            let currentSecs = time;
+            setTime(--currentSecs);
+            if (currentSecs <= 0) setChange(true);
+        }, 1000);
+        return () => clearInterval(interval);
+    });
 
     const scrollFooter = () => {
         footer.current?.scrollIntoView({behavior: 'smooth'});
         setReachedBottom(true);
     }
-
-    useEffect(() => {
-        
-    }, [reachedBottom])
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/events`)
@@ -35,9 +44,11 @@ const Events = () => {
 
     return (
         <>
+            {change && <Navigate to='/info' />}
             <div className='event-container has-text-centered font'>
                 <Scroll title='click me' className='down' click={scrollFooter} />
-                <h1 className="title info-title">Náš tým</h1>
+                <h1 className="title info-title">Události</h1>
+                <progress className="progress is-danger is-large" value={time} max={max}></progress>
                 <Card title={'Petr Tran'} subtitle={'Stravování'}/>
                 <Card title={'Petr Tran'} subtitle={'Smlouvy s klienty'}/>
                 <Card title={'Petr Tran'} subtitle={'Sociální záležitosti'}/>
