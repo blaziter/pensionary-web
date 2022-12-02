@@ -11,9 +11,9 @@ const Info = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             let currentSecs = time;
-            setTime(--currentSecs);
+            setTime(currentSecs-0.01);
             if (currentSecs <= 0) setChange(true);
-        }, 1000);
+        }, 10);
         return () => clearInterval(interval);
     });
 

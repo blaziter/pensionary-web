@@ -18,10 +18,10 @@
 }
 
 .info-card-image {
-    min-width: 365px;
-    min-height: 365px;
-    max-width: 365px;
-    max-height: 365px;
+    min-width: 256px;
+    min-height: 256px;
+    max-width: 256px;
+    max-height: 256px;
 }
 
 .info-card-content {
@@ -31,6 +31,10 @@
     align-items: center;
     align-content: center;
     align-self: stretch;
+}
+
+.card-content {
+    padding: 0;
 }
 
 .info-card-title {
@@ -49,3 +53,6 @@
     border-top: 0;
 }
 
+progress {
+    border-radius: 0 !important;
+}

@@ -13,10 +13,6 @@ interface annoucement {
 
 const Events = () => {
     const [events, setEvents] = useState([]);
-    const [direction, setDirection] = useState(false);
-    const [reachedBottom, setReachedBottom] = useState(false);
-    const header = useRef<HTMLElement>(null);
-    const footer = useRef<HTMLElement>(null);
     const max = 30;
     const [time, setTime] = useState(30);
     const [change, setChange] = useState(false);
@@ -24,16 +20,11 @@ const Events = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             let currentSecs = time;
-            setTime(--currentSecs);
+            setTime(currentSecs-0.01);
             if (currentSecs <= 0) setChange(true);
-        }, 1000);
+        }, 10);
         return () => clearInterval(interval);
     });
-
-    const scrollFooter = () => {
-        footer.current?.scrollIntoView({behavior: 'smooth'});
-        setReachedBottom(true);
-    }
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/events`)
@@ -46,7 +37,6 @@ const Events = () => {
         <>
             {change && <Navigate to='/info' />}
             <div className='event-container has-text-centered font'>
-                <Scroll title='click me' className='down' click={scrollFooter} />
                 <h1 className="title info-title">Události</h1>
                 <progress className="progress is-danger is-large" value={time} max={max}></progress>
                 <Card title={'Petr Tran'} subtitle={'Stravování'}/>
@@ -70,7 +60,7 @@ const Events = () => {
                         )
                     })
                 }
-                <EventFooter ref={footer} />
+                <EventFooter />
             </div>
         </>
     );
