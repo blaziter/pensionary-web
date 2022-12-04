@@ -10,7 +10,7 @@ const Card = ({ title, subtitle }: CardProps) => {
                 <div className='card-content'>
                     <div className='media'>
                         <div className='media-left'>
-                            <figure className='image is-365x365'>
+                            <figure className='image'>
                                 <img className='info-card-image' src='divine-hair-block.jpg' alt='Placeholder image' />
                             </figure>
                         </div>
@@ -18,8 +18,6 @@ const Card = ({ title, subtitle }: CardProps) => {
                             <p className='title info-card-title'>{title}</p>
                             <p className='subtitle info-card-subtitle'>{subtitle}</p>
                         </div>
-                    </div>
-                    <div className='content'>
                     </div>
                 </div>
             </div>

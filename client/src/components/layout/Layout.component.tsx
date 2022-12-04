@@ -19,6 +19,16 @@ const Layout: FC<Props> = (props: Props) => {
                                     Stavy zaměstnanců
                                 </Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to='/info'>
+                                <Nav.Link>
+                                    Informace
+                                </Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to='/events'>
+                                <Nav.Link>
+                                    Události
+                                </Nav.Link>
+                            </LinkContainer>
                         </Nav>
                         <Nav>
                             <LinkContainer to='/login'>

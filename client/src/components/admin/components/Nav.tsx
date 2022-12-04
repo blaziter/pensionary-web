@@ -13,11 +13,11 @@ const Nav = () => {
     return (
         <>
             <div className='navbar admin-navbar'>
-                <Link className="admin-brand" to='/admin'>
+                <Link className="admin-brand" to='/admin/dashboard'>
                     Zdravotně sociální služby Turnov
                 </Link>
                 <div className="navbar-start">
-                    <NavLink className="admin-item" to='/admin'>
+                    <NavLink className="admin-item" to='/admin/dashboard'>
                         Home
                     </NavLink>
                 </div>

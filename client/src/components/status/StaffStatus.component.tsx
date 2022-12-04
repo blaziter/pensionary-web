@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsCheckLg, BsFillInfoCircleFill } from 'react-icons/bs';
-import StatusFooter from '../footer/StatusFooter';
+import Footer from '../footer/Footer';
 
 interface Employee {
     prefix: string;
@@ -67,24 +67,24 @@ const StaffStatus = () => {
                         </div>
                         <div className='message-body'>
                             <div className='directors'>
-                                <div className='employee'>
-                                    <p className='employee-text'>Ředitelka</p>
-                                    <p className='employee-text'>Bc. {'Renata'.charAt(0)}. Poláková DiS.</p>
+                                <div className='director'>
+                                    <p className='director-role'>Ředitelka</p>
+                                    <p className='director-name'>Bc. {'Renata'.charAt(0)}. Poláková DiS.</p>
                                     <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
                                 </div>
-                                <div className='employee'>
-                                    <p className='employee-text'>Zást. ředitele</p>
-                                    <p className='employee-text'>{'Iva'.charAt(0)}. Čermáková</p>
+                                <div className='director'>
+                                    <p className='director-role'>Zást. ředitele</p>
+                                    <p className='director-name'>{'Iva'.charAt(0)}. Čermáková</p>
                                     <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
                                 </div>
-                                <div className='employee'>
-                                    <p className='employee-text'>Vedoucí sestra</p>
-                                    <p className='employee-text'>{'Sigmund'.charAt(0)}. Rigová</p>
+                                <div className='director'>
+                                    <p className='director-role'>Vedoucí sestra</p>
+                                    <p className='director-name'>{'Sigmund'.charAt(0)}. Rigová</p>
                                     <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
                                 </div>
-                                <div className='employee'>
-                                    <p className='employee-text'>Sociální pracov.</p>
-                                    <p className='employee-text'>Bc. {'Klára'.charAt(0)}. Svobodová</p>
+                                <div className='director'>
+                                    <p className='director-role'>Sociální pracov.</p>
+                                    <p className='director-name'>Bc. {'Klára'.charAt(0)}. Svobodová</p>
                                     <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
                                 </div>
                             </div>
@@ -132,16 +132,10 @@ const StaffStatus = () => {
                                     <div className="day-title">Denní</div>
                                     <div className="day-body">
                                         <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová</p>
+                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová, {'Jana'.charAt(0)}. Bartoňová</p>
                                         </div>
                                         <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Bartoňová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Eva'.charAt(0)}. Martincová</p>
+                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová, {'Eva'.charAt(0)}. Martincová</p>
                                         </div>
                                         <div className='employee'>
                                             <p className='employee-text'>{'Kateřina'.charAt(0)}. Peřinková</p>
@@ -171,10 +165,7 @@ const StaffStatus = () => {
                                     <div className="day-title">Denní</div>
                                     <div className="day-body">
                                         <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Bartoňová</p>
+                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová, {'Jana'.charAt(0)}. Bartoňová</p>
                                         </div>
                                         <div className='employee'>
                                             <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová</p>
@@ -204,16 +195,10 @@ const StaffStatus = () => {
                                     <div className="day-title">Denní</div>
                                     <div className="day-body">
                                         <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová</p>
+                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová, {'Jana'.charAt(0)}. Bartoňová</p>
                                         </div>
                                         <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Bartoňová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Eva'.charAt(0)}. Martincová</p>
+                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová, {'Eva'.charAt(0)}. Martincová</p>
                                         </div>
                                         <div className='employee'>
                                             <p className='employee-text'>{'Kateřina'.charAt(0)}. Peřinková</p>
@@ -235,7 +220,7 @@ const StaffStatus = () => {
                         </div>
                     </article>
                 </div>
-                <StatusFooter />
+                <Footer />
             </div>
         </>
     );

@@ -14,7 +14,7 @@ const Menu = () => {
                     Obecné
                 </p>
                 <ul className="menu-list">
-                    <li><NavLink className='menu-item' to='/admin'><ImStatsBars /> Přehled</NavLink></li>
+                    <li><NavLink className='menu-item' to='/admin/dashboard'><ImStatsBars /> Přehled</NavLink></li>
                 </ul>
                 <p className="menu-label">
                     Správa

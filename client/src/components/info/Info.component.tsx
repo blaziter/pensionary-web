@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import InfoFooter from "../footer/InfoFooter";
+import Footer from "../footer/Footer";
 import Card from "./components/Card";
 
 const Info = () => {
@@ -35,7 +35,7 @@ const Info = () => {
                 <Card title={'Petr Tran'} subtitle={'Pokladní pro klienty'}/>
                 <Card title={'Petr Tran'} subtitle={'Úřední záležitosti'}/>
                 <Card title={'Petr Tran'} subtitle={'Metodička'}/>
-                <InfoFooter />
+                <Footer />
             </div>
         </>
     );

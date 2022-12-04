@@ -6,4 +6,6 @@ export { default as Events } from '../components/events/Events.component';
 export { default as Layout } from '../components/layout/Layout.component';
 export { default as Status } from '../components/status/StaffStatus.component';
 export { default as EditMenu } from '../components/admin/components/EditMenu.component';
+export { default as Create } from '../components/admin/components/CRUD/Create.component';
+export { default as Update } from '../components/admin/components/CRUD/Update.component';
 export { default as Table } from '../components/admin/components/components/Table.component';

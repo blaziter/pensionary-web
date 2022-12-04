@@ -1,5 +1,6 @@
 #root:has(> .info-container) {
     overflow: auto;
+    background-color: #fff !important;
 }
 
 .info-container {
@@ -7,6 +8,7 @@
     min-height: 100vh;
     min-width: 100vw;
     flex-direction: column;
+    background-color: #fff;
 }
 
 .info-title {
@@ -37,6 +39,10 @@
     padding: 0;
 }
 
+.card {
+    border-radius: 0 !important;
+}
+
 .info-card-title {
     font-size: 6rem;
     font-weight: 500;
@@ -55,4 +61,53 @@
 
 progress {
     border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+@media (width <= 1080px) {
+    .info-card-image {
+        min-width: 130px;
+        min-height: 130px;
+        max-width: 130px;
+        max-height: 130px;
+    }
+
+    .card {
+        padding: 3px 24px;
+        border-radius: 0 !important;
+    }
+
+    .image {
+        margin: 0;
+    }
+
+    .media-left {
+        margin: 0;
+    }
+
+    .info-card-title {
+        font-size: 3rem;
+    }
+
+    .info-card-subtitle {
+        font-size: 2rem;
+    }
+
+    .title.info-title {
+        font-size: 4rem;
+        margin: 0;
+    }
+
+    .info-container.footer {
+        border-top: 0;
+    }
+
+    .subtitle.info-card-subtitle {
+        margin: 0;
+    }
+
+    progress {
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
 }
