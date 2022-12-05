@@ -36,7 +36,7 @@ const StaffStatus = () => {
 
     useEffect(() => {
         /*let finished = false;
-        axios.get(`${process.env.REACT_APP_API_URL}/employees`)
+        axios.get(`${import.meta.env.VITE_.REACT_APP_API_URL}/employees`)
             .then(async (res) => {
                 const data = await res.data;
                 await setStaff(data);

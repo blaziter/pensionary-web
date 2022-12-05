@@ -1,0 +1,18 @@
+.add-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+}
+
+.button.crud {
+    background-color: var(--essential-color);
+    text-decoration: none;
+    color: var(--white);
+}
+
+.swap-availability {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+}

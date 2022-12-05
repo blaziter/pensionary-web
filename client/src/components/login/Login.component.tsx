@@ -25,10 +25,11 @@ const Login = () => {
 
     const LoginHandler = async (e: any) => {
         e.preventDefault();
-                    await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { payload: user })
+        await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { payload: user })
             .then((res) => {
-                    navigate('/admin');
-                }
+                console.log(res)
+                navigate('/admin');
+            }
             )
             .catch(e);
     }

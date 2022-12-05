@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import './components/admin/components/components/Table.css';
+@import './components/admin/components/components/Tile.css';
+@import './components/admin/components/CRUD/Create.css';
+@import './components/admin/components/Menu.css';
+@import './components/admin/components/Nav.css';
+@import './components/status/StaffStatus.css';
+@import './components/events/Events.css';
+@import './components/footer/Footer.css';
+@import './components/layout/Layout.css';
+@import './components/scroll/Scroll.css';
+@import './components/admin/Admin.css';
+@import './components/login/Login.css';
+@import './components/home/Home.css';
+@import './components/info/Info.css';
+
 :root {
     --primary-color: #222e3c;
     --primary-text-color: #fff;
@@ -10,22 +27,6 @@
     --white: #fff;
     --black: #000;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-@import './components/admin/components/components/Table.css';
-@import './components/admin/components/components/Tile.css';
-@import './components/admin/components/Menu.css';
-@import './components/admin/components/Nav.css';
-@import './components/status/StaffStatus.css';
-@import './components/events/Events.css';
-@import './components/footer/Footer.css';
-@import './components/layout/Layout.css';
-@import './components/scroll/Scroll.css';
-@import './components/admin/Admin.css';
-@import './components/login/Login.css';
-@import './components/home/Home.css';
-@import './components/info/Info.css';
 
 body {
   margin: 0;

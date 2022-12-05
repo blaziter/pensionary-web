@@ -16,3 +16,17 @@
     display: flex;
     align-items: center;
 }
+
+.button.add-employee {
+    background-color: var(--essential-color);
+    text-decoration: none;
+    color: var(--white);
+}
+
+.no-deco {
+    text-decoration: none;
+}
+
+.float-right {
+    float: right;
+}
