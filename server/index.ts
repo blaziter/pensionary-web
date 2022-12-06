@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import authRouter from './routes/auth.route';
 import employeeRouter from './routes/employee.route';
 import announcementRouter from './routes/announcement.route';
+import userRouter from './routes/user.routes';
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -25,14 +26,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 //ROUTES
-app.use('/api/announcement', announcementRouter);
-
 app.use('/api/auth', authRouter);
 
 app.use(authentication);
 app.use(isLoggedIn);
 
+app.use('/api/user', userRouter);
 app.use('/api/employee', employeeRouter);
+app.use('/api/announcement', announcementRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
