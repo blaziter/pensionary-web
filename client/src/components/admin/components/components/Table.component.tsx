@@ -13,10 +13,10 @@ const Table = () => {
 
     useEffect(() => {
         console.log(role)
-        /*axios.get(`${import.meta.env.VITE_API_URL}/employee/${role}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/employee/${role}`)
             .then(async res => {
                 await setEmployees(res.data.employees);
-            });*/
+            });
     }, [role]);
 
     const handleDelete = (id: string) => {
