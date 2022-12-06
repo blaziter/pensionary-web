@@ -7,7 +7,7 @@ import { isLoggedOut } from '../middleware/loggedOut.middleware';
 const router = express.Router();
 
 router.post('/login', isLoggedOut, adminLogin);
-router.post('/logout', authentication, isLoggedIn, logout);
+router.post('/logout', logout);
 router.post('/verify', isLoggedIn, authorization);
 
 export default router;

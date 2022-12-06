@@ -28,7 +28,7 @@ export const newEmployee = (req: Request, res: Response) => {
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
 
-        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.prefix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
+        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.prefix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
             if (err) {
                 console.log(err);
                 db.detach();
@@ -59,13 +59,13 @@ export const updateEmployee = (req: Request, res: Response) => {
             //This is definetly woodoo, need to fix, dont know how :(
             if (data.availability) user[0].AVAILABILITY = data.availability;
             if (data.name) user[0].NAME = data?.name;
-            if (data.preffix) user[0].PREFFIX = data?.preffix;
+            if (data.prefix) user[0].PREFIX = data?.prefix;
             if (data.suffix) user[0].SUFFIX = data?.suffix;
             if (data.role) user[0].ROLE = data?.role;
             if (data.shift) user[0].SHIFT = data?.shift;
             if (data.workplace) user[0].WORKPLACE = data?.workplace;
             
-            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, preffix = ?, suffix = ?, role = ?, shift = ?, workplace = ?, WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFFIX, user[0].SUFFIX, user[0].ROLE, user[0].SHIFT, user[0].WORKPLACE, employeeId], (err: string) => {
+            db.query('UPDATE EMPLOYEE set availability = ?, name = ?, prefix = ?, suffix = ?, role = ?, shift = ?, workplace = ?, WHERE employeeId = ?', [user[0].AVAILABILITY, user[0].NAME, user[0].PREFIX, user[0].SUFFIX, user[0].ROLE, user[0].SHIFT, user[0].WORKPLACE, employeeId], (err: string) => {
                 if (err) {
                     console.log(err);
                     db.detach();
