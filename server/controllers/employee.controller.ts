@@ -28,14 +28,14 @@ export const newEmployee = (req: Request, res: Response) => {
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
 
-        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.prefix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
+        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.preffix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
             if (err) {
                 console.log(err);
                 db.detach();
                 return res.status(400).send('Something went wrong');
             }
 
-            res.status(200).send('User created successfully');
+            res.status(200).send('Employee created successfully');
             db.detach();
         })
     })
@@ -52,7 +52,7 @@ export const updateEmployee = (req: Request, res: Response) => {
         if (err) throw err;
     
         db.query('SELECT * FROM employee WHERE employeeId = ?', [employeeId], (err, result) => {
-            if (err) return res.status(400).send('Unknown user');
+            if (err) return res.status(400).send('Unknown employee');
 
             user = bufferParser(result);
 
@@ -85,8 +85,6 @@ export const deleteEmployee = (req: Request, res: Response) => {
         return res.status(400).send('Missing employee uuid');
     }
 
-    console.log(employeeId);
-
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
     
@@ -103,57 +101,18 @@ export const deleteEmployee = (req: Request, res: Response) => {
     });
 }
 
-export const getEmployeeByRole = (req: Request, res: Response) => {
-    const paramsData = req.params;
+export const getEmployeeByParams = (req: Request, res: Response) => {
+    const group = req.query.group;
+    const data = req.query.data;
 
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
     
-        db.query('SELECT * FROM employee WHERE role = ?', [paramsData.role], (err, result) => {
+        db.query(`SELECT * FROM employee WHERE ${group} = ?`, [data], (err, result) => {
             if (err) {
                 console.log(err);
                 db.detach();
-                return res.status(404).send('Selected role doesnt exist');
-            }
-
-            result = bufferParser(result);
-            res.status(200).send(result);
-            db.detach();
-        });
-    });
-}
-
-export const getEmployeeByShift = (req: Request, res: Response) => {
-    const paramsData = req.params;
-
-    Firebird.attach(options, (err, db) => {
-        if (err) throw err;
-    
-        db.query('SELECT * FROM employee WHERE shift = ?', [paramsData.shift], (err, result) => {
-            if (err) {
-                console.log(err);
-                db.detach();
-                return res.status(404).send('Selected shift doesnt exist');
-            }
-
-            result = bufferParser(result);
-            res.status(200).send(result);
-            db.detach();
-        });
-    });
-}
-
-export const getEmployeeByWorkplace = (req: Request, res: Response) => {
-    const paramsData = req.params;
-
-    Firebird.attach(options, (err, db) => {
-        if (err) throw err;
-    
-        db.query('SELECT * FROM employee WHERE workplace = ?', [paramsData.workplace], (err, result) => {
-            if (err) {
-                console.log(err);
-                db.detach();
-                return res.status(404).send('Selected workplace doesnt exist');
+                return res.status(404).send('Nothing found');
             }
 
             result = bufferParser(result);
