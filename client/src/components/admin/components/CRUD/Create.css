@@ -16,3 +16,7 @@
     align-items: center;
     min-height: 40px;
 }
+
+.create-field {
+    margin-right: 1rem;
+}
