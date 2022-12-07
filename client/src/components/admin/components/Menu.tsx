@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ImStatsBars } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
 import { BiPlusMedical } from "react-icons/bi";
 import { GiMedicines } from "react-icons/gi";
+import { BsFillCalendarEventFill } from "react-icons/bs";
+import axios from "axios";
 
 const Menu = () => {
-
     return (
         <>
             <aside className="menu user-select-none">
@@ -26,6 +27,7 @@ const Menu = () => {
                         <ul>
                             <li><NavLink className='menu-item' to='/table/doctor'><BiPlusMedical /> Lékaři</NavLink></li>
                             <li><NavLink className='menu-item' to='/table/nurse'><GiMedicines /> Sestřičky</NavLink></li>
+                            <li><NavLink className='menu-item' to='/table/announcements'><BsFillCalendarEventFill /> Události</NavLink></li>
                         </ul>
                     </li>
                 </ul>

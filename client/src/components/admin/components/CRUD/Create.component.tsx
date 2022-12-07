@@ -23,23 +23,21 @@ const Create = () => {
     const [mode, setMode] = useState('employee');
 
     const handleChange = (e: any) => {
-        mode == 'employee' ? setEmployee(e.target.value == 'doctor' || 'nurse' ? { ...employee, [e.target.name]: e.target.value } : { ...employee, role: 'doctor'}) : setUser(e.target.value == 'admin' ? { ...user, [e.target.name]: e.target.value } : { ...user, role: 'admin'})
+        mode == 'employee' ? setEmployee(e.target.value == 'doctor' || 'nurse' ? { ...employee, [e.target.name]: e.target.value } : { ...employee, role: 'doctor' }) : setUser(e.target.value == 'admin' ? { ...user, [e.target.name]: e.target.value } : { ...user, role: 'admin' })
     }
 
     const add = () => {
         console.log(mode)
         mode != 'admin' ?
-            console.log(employee)
-            /*axios.post(`${import.meta.env.VITE_API_URL}/employee/new`, employee)
+            axios.post(`${import.meta.env.VITE_API_URL}/employee/new`, employee)
                 .then(res => {
                     console.log(res);
-                })*/
+                })
             :
-            console.log(user)
-        /*axios.post(`${import.meta.env.VITE_API_URL}/user/new`, user)
-            .then(res => {
-                console.log(res);
-            })*/
+            axios.post(`${import.meta.env.VITE_API_URL}/user/new`, user)
+                .then(res => {
+                    console.log(res);
+                })
     }
 
     return (
@@ -51,7 +49,6 @@ const Create = () => {
                         <Menu />
                     </div>
                     <div className='column is-10'>
-                        <h1>CREATE</h1>
                         <form className='add-container'>
                             {
                                 mode != 'admin' ?
