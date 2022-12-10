@@ -25,7 +25,8 @@ const Login = () => {
 
     const LoginHandler = async (e: any) => {
         e.preventDefault();
-        await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { payload: user })
+        axios.defaults.withCredentials = true;
+        await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { payload: user }, { withCredentials: true })
             .then(async (res) => {
                 const status = await res.status;
                 console.log(res)

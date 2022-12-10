@@ -11,10 +11,10 @@ export const adminLogin = (req: Request, res: Response) => {
         res.status(400).send('All fields need to be filled out')
     }
 
-    Firebird.attach(options, (err, db) => {
-        if (err)
-            throw err;
+    console.log(payload)
 
+    Firebird.attach(options, (err, db) => {
+        if (err) throw err;
         db.query('SELECT userId, username, password FROM USERS WHERE username = ?;', [payload.username], (err, result) => {
             if (err) {
                 console.log(err)
@@ -32,7 +32,6 @@ export const adminLogin = (req: Request, res: Response) => {
                 }
 
                 const token = jwt.sign(data, process.env.JWT_SECRET_KEY)
-                req.session.loggedIn = true;
 
                 res.status(200).cookie("token", token, {
                     httpOnly: true
