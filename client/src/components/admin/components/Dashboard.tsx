@@ -12,25 +12,26 @@ const Dashboard = () => {
 
     useEffect(() => {
         axios.defaults.withCredentials=true;
-        axios.get(`${import.meta.env.VITE_API_URL}/user/all`)
+        axios.get(`${import.meta.env.VITE_API_URL}/user/all`, { withCredentials: true })
         .then(res => setAdmins(res.data.length))
     })
 
     useEffect(() => {
         axios.defaults.withCredentials=true;
-        axios.get(`${import.meta.env.VITE_API_URL}/announcement/all`)
+        axios.get(`${import.meta.env.VITE_API_URL}/announcement/all`, { withCredentials: true })
         .then(res => setAnnouncements(res.data.length))
+        .catch(err => console.log(err))
     })
 
     useEffect(() => {
         axios.defaults.withCredentials=true;
-        axios.get(`${import.meta.env.VITE_API_URL}/employee/?group=ROLE&data=doctor`)
+        axios.get(`${import.meta.env.VITE_API_URL}/employee/?group=ROLE&data=doctor`, { withCredentials: true })
         .then(res => setDoctors(res.data.length))
     })
 
     useEffect(() => {
         axios.defaults.withCredentials=true;
-        axios.get(`${import.meta.env.VITE_API_URL}/employee/?group=ROLE&data=nurse`)
+        axios.get(`${import.meta.env.VITE_API_URL}/employee/?group=ROLE&data=nurse`, { withCredentials: true })
         .then(res => setNurses(res.data.length))
     })
 

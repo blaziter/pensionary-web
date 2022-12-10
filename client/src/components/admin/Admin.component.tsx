@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
@@ -8,7 +9,14 @@ import Nav from './components/Nav';
 const AdminComponent = () => {
 
     useEffect(() => {
-        
+        axios.defaults.withCredentials = true;
+        axios.post(`${import.meta.env.VITE_API_URL}/auth/verify`, { withCredentials: true })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     });
 
     return (

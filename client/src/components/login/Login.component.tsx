@@ -3,7 +3,7 @@ import { Layout } from '../../pages/Pages';
 import { Form, Image } from 'react-bootstrap';
 import { CgWebsite } from 'react-icons/cg';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export interface User {
     username: String,
@@ -17,7 +17,7 @@ const Login = () => {
             password: ''
         }
     );
-    const navigate = useNavigate();
+    const [redir, setRedir] = useState(false);
 
     const handleState = (e: string | any) => {
         setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -26,9 +26,12 @@ const Login = () => {
     const LoginHandler = async (e: any) => {
         e.preventDefault();
         await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { payload: user })
-            .then((res) => {
+            .then(async (res) => {
+                const status = await res.status;
                 console.log(res)
-                navigate('/admin');
+                setTimeout(() => {
+                    status == 200 ? setRedir(true) : setRedir(false);
+                }, 1000)
             }
             )
             .catch(e);
@@ -36,6 +39,7 @@ const Login = () => {
 
     return (
         <Layout>
+            {redir ? <Navigate to={'/admin'} replace /> : <></>}
             <div className='columns is-multiline'>
                 <div className='column is-8 is-offset-2 register'>
                     <div className='columns'>
