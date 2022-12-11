@@ -18,6 +18,20 @@ export const getAllUsers = (req: Request, res: Response) => {
     });
 }
 
+export const getUserById = (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    Firebird.attach(options, (err, db) => {
+        if (err) throw err;
+    
+        db.query('SELECT userId, username, password FROM users WHERE userId = ?', [userId], (err, result) => {
+            result = bufferParser(result);
+            res.status(200).send(result);
+            db.detach();
+        });
+    });
+}
+
 export const newUser = (req: Request, res: Response) => {
     let user = req.body as User;
     user.userId = uuidv4();
@@ -74,7 +88,7 @@ export const updateUser = (req: Request, res: Response) => {
     });
 }
 
-export const deleteEmployee = (req: Request, res: Response) => {
+export const deleteUser = (req: Request, res: Response) => {
     let { userId } = req.params;
 
     if (!userId) {
