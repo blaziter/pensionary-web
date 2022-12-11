@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/all', getAllAnnouncements);
 router.post('/new', createAnnouncement);
-router.put('/:announcementId/edit', editAnnouncement);
-router.delete('/:announcementId/delete', deleteAnnouncement);
+router.put('/:announcementId', editAnnouncement);
+router.delete('/:announcementId', deleteAnnouncement);
 
 export default router;
