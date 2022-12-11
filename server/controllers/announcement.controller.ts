@@ -21,14 +21,14 @@ export const createAnnouncement = (req: Request, res: Response) => {
     let announcement = req.body as Announcement;
     announcement.announcementId = uuidv4();
 
-    if (announcement.announcement.length > 255) {
+    if (announcement.ANNOUNCEMENT.length > 255) {
         return res.status(400).send('Announcement text is too long!')
     }
 
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
 
-        db.query('INSERT INTO ANNOUNCEMENTS (ANNOUNCEMENTID, TITLE, ANNOUNCEMENT) VALUES (?, ?, ?);', [announcement.announcementId, announcement.title, announcement.announcement], (err, result) => {
+        db.query('INSERT INTO ANNOUNCEMENTS (ANNOUNCEMENTID, TITLE, ANNOUNCEMENT) VALUES (?, ?, ?);', [announcement.announcementId, announcement.TITLE, announcement.ANNOUNCEMENT], (err, result) => {
             if (err) {
                 console.log(err);
                 db.detach();

@@ -1,7 +1,7 @@
 export interface Employee {
     employeeId: string,
     suffix: string,
-    preffix:string,
+    prefix:string,
     name: string,
     role: string,
     availability: number,

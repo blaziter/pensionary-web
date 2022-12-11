@@ -28,7 +28,7 @@ export const newEmployee = (req: Request, res: Response) => {
     Firebird.attach(options, (err, db) => {
         if (err) throw err;
 
-        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.preffix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
+        db.query('INSERT INTO EMPLOYEE (EMPLOYEEID, SUFFIX, PREFIX, NAME, ROLE, AVAILABILITY, SHIFT, WORKPLACE) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [employee.employeeId, employee.suffix, employee.prefix, employee.name, employee.role, employee.availability, employee.shift, employee.workplace], (err, result) => {
             if (err) {
                 console.log(err);
                 db.detach();
