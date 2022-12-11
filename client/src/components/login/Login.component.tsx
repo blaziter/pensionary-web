@@ -29,7 +29,6 @@ const Login = () => {
         await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { payload: user }, { withCredentials: true })
             .then(async (res) => {
                 const status = await res.status;
-                console.log(res)
                 setTimeout(() => {
                     status == 200 ? setRedir(true) : setRedir(false);
                 }, 1000)

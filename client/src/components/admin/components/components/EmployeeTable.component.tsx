@@ -1,3 +1,5 @@
+// @ts-nocheck
+import React, { Suspense } from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -5,25 +7,19 @@ import Menu from "../Menu";
 import Nav from "../Nav";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import EmployeeModal from './components/EmployeeModal';
 
 const EmployeeTable = () => {
-
     const { role } = useParams();
-    const [searchRole, setSearchRole] = useState('');
     const [employees, setEmployees] = useState(['ahoj']);
+    const [modal, setModal] = useState(false);
+    const [deleteEmployee, setDeleteEmployee] = useState({});
 
     useEffect(() => {
         axios.defaults.withCredentials = true;
         axios.get(`${import.meta.env.VITE_API_URL}/employee/all`)
-            .then(async res => setEmployees(await res.data))
-    }, [role]);
-
-    /*const handleDelete = (id: string) => {
-        axios.delete(`${import.meta.env.VITE_API_URL}/employee/${id}`)
-            .then(async res => {
-                setEmployees(await res.data);
-            });
-    }*/
+            .then(res => setEmployees(res.data))
+    }, []);
 
     return (
         <>
@@ -51,22 +47,27 @@ const EmployeeTable = () => {
                             <tbody>
                                 {
                                     employees.map(employee => {
-                                        return (
-                                            <tr key={employee.EMPLOYEEID}>
-                                                <td><p className='admin-value'>{employee.PREFIX}</p></td>
-                                                <td><p className='admin-value'>{employee.SUFFIX}</p></td>
-                                                <td><p className='admin-value'>{employee.NAME}</p></td>
-                                                <td><p className='admin-value'>{employee.ROLE == 'doctor' ? 'Doktor/ka' : 'Sestra'}</p></td>
-                                                <td><p className='admin-value'>{employee.AVAILABILITY == 1 ? 'Dostupný/á' : 'Nedostupný/á'}</p></td>
-                                                <td><p className='admin-value'>{employee.WORKPLACE}</p></td>
-                                                <td><p className='admin-value'>{employee.SHIFT}</p></td>
-                                                <td>
-                                                    <div className='button-holder'>
-                                                        <Link to={`edit/${employee.EMPLOYEEID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
-                                                        <button className='button admin-edit' onClick={() => { }}><AiFillDelete /></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        if (employee.ROLE == role) return (
+                                            <>
+                                                <tr key={employee.EMPLOYEEID}>
+                                                    <td><p className='admin-value'>{employee.PREFIX}</p></td>
+                                                    <td><p className='admin-value'>{employee.SUFFIX}</p></td>
+                                                    <td><p className='admin-value'>{employee.NAME}</p></td>
+                                                    <td><p className='admin-value'>{employee.ROLE == 'doctor' ? 'Doktor/ka' : 'Sestra'}</p></td>
+                                                    <td><p className='admin-value'>{employee.AVAILABILITY == 1 ? 'Dostupný/á' : 'Nedostupný/á'}</p></td>
+                                                    <td><p className='admin-value'>{employee.WORKPLACE}</p></td>
+                                                    <td><p className='admin-value'>{employee.SHIFT}</p></td>
+                                                    <td>
+                                                        <div className='button-holder'>
+                                                            <Link to={`edit/${employee.EMPLOYEEID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
+                                                            <button className='button admin-edit' onClick={() => {
+                                                                setDeleteEmployee(employee);
+                                                                setModal(true)
+                                                            }}><AiFillDelete /></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </>
                                         )
                                     })
                                 }
@@ -75,6 +76,9 @@ const EmployeeTable = () => {
                     </div>
                 </div>
             </div>
+            {
+                modal ? <EmployeeModal className={modal ? 'is-active' : ''} employee={deleteEmployee} /> : null
+            }
         </>
     );
 }

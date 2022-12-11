@@ -24,17 +24,19 @@ const Create = () => {
 
     const handleChange = (e: any) => {
         mode == 'employee' ? setEmployee(e.target.value == 'doctor' || 'nurse' ? { ...employee, [e.target.name]: e.target.value } : { ...employee, role: 'doctor' }) : setUser(e.target.value == 'admin' ? { ...user, [e.target.name]: e.target.value } : { ...user, role: 'admin' })
+        employee.role == 'admin' ? setEmployee({ ...employee, [e.target.name]: e.target.value }) : null
+        user.role != 'admin' ? setUser({ ...user, role: 'admin' }) : null
     }
 
     const add = () => {
-        console.log(mode)
+        axios.defaults.withCredentials = true;
         mode != 'admin' ?
-            axios.post(`${import.meta.env.VITE_API_URL}/employee/new`, employee)
+            axios.post(`${import.meta.env.VITE_API_URL}/employee/new`, employee, { withCredentials: true })
                 .then(res => {
                     console.log(res);
                 })
             :
-            axios.post(`${import.meta.env.VITE_API_URL}/user/new`, user)
+            axios.post(`${import.meta.env.VITE_API_URL}/user/new`, user, { withCredentials: true })
                 .then(res => {
                     console.log(res);
                 })
@@ -49,7 +51,7 @@ const Create = () => {
                         <Menu />
                     </div>
                     <div className='column is-10'>
-                        <form className='add-container'>
+                        <form className='create-update-container'>
                             {
                                 mode != 'admin' ?
                                     <>

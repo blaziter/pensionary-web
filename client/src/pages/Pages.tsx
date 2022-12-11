@@ -9,3 +9,5 @@ export { default as EditMenu } from '../components/admin/components/EditMenu.com
 export { default as Create } from '../components/admin/components/CRUD/Create.component';
 export { default as Update } from '../components/admin/components/CRUD/Update.component';
 export { default as Table } from '../components/admin/components/components/Table.component';
+export { default as CreateEvent } from '../components/admin/components/CRUD/CreateEvent.component';
+export { default as UpdateEvent } from '../components/admin/components/CRUD/UpdateEvent.component';
