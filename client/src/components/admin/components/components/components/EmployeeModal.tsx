@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 interface ModalProps {
     className: string;
@@ -13,19 +14,28 @@ interface ModalProps {
         AVAILABILITY: number;
         WORKPLACE: string;
         SHIFT: string;
-    }
+    },
+    onClick: () => void;
 }
 
-const EmployeeModal = ({ className, employee }: ModalProps) => {
+const EmployeeModal = ({ className, employee, onClick }: ModalProps) => {
+    const [close, setClose] = useState(false);
 
     const handleDelete = () => {
         axios.defaults.withCredentials = true;
         axios.delete(`${import.meta.env.VITE_API_URL}/employee/${employee.EMPLOYEEID}`)
-            .then(res => console.log(res))
+            .then(res => {
+                if (res.status == 200) {
+                    setClose(true);
+                    window.location.reload();
+                }
+                return setClose(false)
+            })
     }
 
     return (
         <React.Suspense fallback={<div>Loading...</div>}>
+            {close && <Navigate to='/admin/employees' replace />}
             <div className={`modal ${className}`}>
             <div className='modal-background'></div>
             <div className='modal-card'>
@@ -35,7 +45,7 @@ const EmployeeModal = ({ className, employee }: ModalProps) => {
                 </header>
                 <footer className='modal-card-foot admin-modal'>
                     <button className='button is-success' onClick={handleDelete}>Smazat</button>
-                    <button className='button is-danger'>Cancel</button>
+                    <button className='button is-danger' onClick={onClick}>Cancel</button>
                 </footer>
             </div>
         </div>

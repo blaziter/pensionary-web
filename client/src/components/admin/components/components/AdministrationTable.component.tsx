@@ -8,12 +8,7 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import UserModal from "./components/UserModal";
 
-interface Admin {
-    ID: string;
-    USERNAME: string;
-}
-
-const AdminTable = () => {
+const AdministrationTable = () => {
     const { role, page } = useParams();
     const [admins, setAdmins] = useState([]);
     const [modal, setModal] = useState(false);
@@ -45,39 +40,23 @@ const AdminTable = () => {
                         <Menu />
                     </div>
                     <div className='column is-10'>
-                        <div className='table-container'>
-                            <div>
-                                <Link to={`/admin/create`} className='no-deco'>
-                                    <button className='button add-employee float-right'>Přidat uživatele</button>
-                                </Link>
-                            </div>
-                            <table className='table admin-table'>
+                        <div>
+                            <Link to={`/admin/create`} className='no-deco'>
+                                <button className='button add-employee float-right'>Přidat člena vedení</button>
+                            </Link>
+                        </div>
+                        <div className="table-container">
+                            <table className="table admin-table">
                                 <thead>
-                                    <th>Uživatelské jméno</th>
-                                    <th>Role</th>
-                                    <th>Správa</th>
+                                    <tr>
+                                        <th>Jméno a příjmení</th>
+                                        <th>Role</th>
+                                        <th>Dostupnost</th>
+                                        <th>Správa</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        admins.slice(10 * (page - 1), 10 * page).map(admin => {
-                                            return (
-                                                <tr key={admin.ID}>
-                                                    <td><p className='admin-value'>{admin.USERNAME}</p></td>
-                                                    <td><p className='admin-value'>Správce</p></td>
-                                                    <td>
-                                                        <div className='button-holder'>
-                                                            <Link to={`edit/${admin.USERID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
-                                                            <button className='button admin-edit' onClick={() => {
-                                                                setDeleteAdmin(admin);
-                                                                setModal(true)
-                                                            }
-                                                            }><AiFillDelete /></button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
+
                                 </tbody>
                             </table>
                         </div>
@@ -143,11 +122,8 @@ const AdminTable = () => {
                     </ul>
                 </nav>
             </div>
-            {
-                modal ? <UserModal className={modal ? 'is-active' : ''} user={deleteAdmin} /> : null
-            }
         </>
     );
 }
 
-export default AdminTable;
+export default AdministrationTable;

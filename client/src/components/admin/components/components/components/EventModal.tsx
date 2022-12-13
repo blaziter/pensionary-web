@@ -15,7 +15,11 @@ const EventModal = ({ className, announcement }: ModalProps) => {
     const handleDelete = () => {
         axios.defaults.withCredentials = true;
         axios.delete(`${import.meta.env.VITE_API_URL}/announcement/${announcement.ANNOUNCEMENTID}`)
-            .then(res => console.log(res))
+            .then(res => {
+                if (res.status == 200) {
+                    window.location.reload();
+                }
+            })
     }
 
     return (

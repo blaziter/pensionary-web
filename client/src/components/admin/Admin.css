@@ -19,6 +19,8 @@
 .admin-layout {
     min-height: calc(100vh - 52px);
     background-color: var(--white);
+    display: flex;
+    flex-direction: column;
 }
 
 .tile-max-width {

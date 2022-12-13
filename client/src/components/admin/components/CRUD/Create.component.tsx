@@ -20,6 +20,13 @@ const Create = () => {
         role: 'admin'
     })
 
+    const [errName, setErrName] = useState(false)
+    const [errUsername, setErrUsername] = useState(false)
+    const [errPassword, setErrPassword] = useState(false)
+    const [errShift, setErrShift] = useState(false)
+    const [errWorkplace, setErrWorkplace] = useState(false)
+    const [errRole, setErrRole] = useState(false)
+
     const [mode, setMode] = useState('employee');
 
     const handleChange = (e: any) => {
@@ -30,6 +37,16 @@ const Create = () => {
 
     const add = () => {
         axios.defaults.withCredentials = true;
+        if (mode == 'admin') {
+            if (user.username == '') setErrUsername(true)
+            if (user.password == '') return setErrPassword(true)
+        }
+        if (mode == 'employee') {
+            if (employee.name == '') setErrName(true)
+            if (employee.shift == '') setErrShift(true)
+            if (employee.workplace == '') setErrWorkplace(true)
+            if (user.role == '' || employee.role == '') return setErrRole(true)
+        }
         mode != 'admin' ?
             axios.post(`${import.meta.env.VITE_API_URL}/employee/new`, employee, { withCredentials: true })
                 .then(res => {
@@ -70,7 +87,10 @@ const Create = () => {
                                         <div className='field create-field'>
                                             <label className='label'>Jméno a příjmení</label>
                                             <div className='control'>
-                                                <input name='name' className='input' type='text' placeholder='Jméno a příjmení' onChange={e => handleChange(e)} />
+                                                <input required name='name' className={errName ? 'input is-danger' : 'input'} type='text' placeholder='Jméno a příjmení' onChange={e => {
+                                                    setErrName(false)
+                                                    handleChange(e)
+                                                }} />
                                             </div>
                                         </div>
                                     </>
@@ -79,13 +99,19 @@ const Create = () => {
                                         <div className='field create-field'>
                                             <label className='label'>Přihlašovací jméno</label>
                                             <div className='control'>
-                                                <input name='username' className='input' type='text' placeholder='Přihlašovací jméno' onChange={e => handleChange(e)} />
+                                                <input required name='username' className={errUsername ? 'input is-danger' : 'input'} type='text' placeholder='Přihlašovací jméno' onChange={e => {
+                                                    setErrUsername(false)
+                                                    handleChange(e)
+                                                }} />
                                             </div>
                                         </div>
                                         <div className='field create-field'>
                                             <label className='label'>Heslo</label>
                                             <div className='control'>
-                                                <input name='password' className='input' type='text' placeholder='Heslo' onChange={e => handleChange(e)} />
+                                                <input required name='password' className={errPassword ? 'input is-danger' : 'input'} type='text' placeholder='Heslo' onChange={e => {
+                                                    setErrPassword(false)
+                                                    handleChange(e)
+                                                }} />
                                             </div>
                                         </div>
                                     </>
@@ -93,9 +119,15 @@ const Create = () => {
                             <div className='field create-field'>
                                 <label className='label'>Role</label>
                                 <div className='control'>
-                                    <div className='select'>
-                                        <select name='role' onChange={e => {
+                                    <div className={errRole ? 'select is-danger' : 'select'}>
+                                        <select required name='role' onChange={e => {
                                             e.target.value == 'admin' ? setMode('admin') : setMode('employee')
+                                            setErrName(false)
+                                            setErrUsername(false)
+                                            setErrPassword(false)
+                                            setErrRole(false)
+                                            setErrShift(false)
+                                            setErrWorkplace(false)
                                             handleChange(e)
                                         }
                                         }>
@@ -109,19 +141,60 @@ const Create = () => {
                             </div>
                             {
                                 mode != 'admin' ?
-                                    <div className='field'>
-                                        <label className='label'>Dostupnost</label>
-                                        <div className='control swap-availability'>
-                                            <label className='checkbox'>
-                                                <input type='checkbox' name='availability' onChange={e => employee.availability == 0 ? setEmployee({ ...employee, availability: 1 }) : setEmployee({ ...employee, availability: 0 })} />
-                                            </label>
+                                    <>
+                                        <div className='field'>
+                                            <label className='label'>Dostupnost</label>
+                                            <div className='control swap-availability'>
+                                                <label className='checkbox'>
+                                                    <input type='checkbox' name='availability' onChange={e => employee.availability == 0 ? setEmployee({ ...employee, availability: 1 }) : setEmployee({ ...employee, availability: 0 })} />
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div className='field create-field'>
+                                            <label className='label'>Směna</label>
+                                            <div className='control'>
+                                                <div className={errShift ? 'select is-danger' : 'select'}>
+                                                    <select required name='shift' onChange={e => {
+                                                        setErrShift(false)
+                                                        handleChange(e)
+                                                    }}>
+                                                        <option value=''>Vybrat směnu</option>
+                                                        <option value='day'>Denní</option>
+                                                        <option value='night'>Noční</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='field create-field'>
+                                            <label className='label'>Oddělení</label>
+                                            <div className='control'>
+                                                <div className={errWorkplace ? 'select is-danger' : 'select'}>
+                                                    <select required name='workplace' onChange={e => {
+                                                        setErrWorkplace(false)
+                                                        handleChange(e)
+                                                    }}>
+                                                        <option value=''>Vybrat oddělení</option>
+                                                        <option value='village'>Vesnička</option>
+                                                        <option value='first-floor'>První patro</option>
+                                                        <option value='ground-floor'>Přízemí</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
                                     :
                                     <>
                                     </>
                             }
                         </form>
+
+                        {errUsername ? <p className='has-text-danger'>Vyplňte přihlašovací jméno</p> : null}
+                        {errPassword ? <p className='has-text-danger'>Vyplňte heslo</p> : null}
+                        {errName ? <p className='has-text-danger'>Vyplňte jméno a příjmení</p> : null}
+                        {errRole ? <p className='has-text-danger'>Vyberte roli</p> : null}
+                        {errShift ? <p className='has-text-danger'>Vyberte směnu</p> : null}
+                        {errWorkplace ? <p className='has-text-danger'>Vyberte oddělení</p> : null}
+                        
                         <button className='button crud float-right' onClick={add}>{mode != 'admin' ? 'Přidat zaměstnance' : 'Přidat správce'}</button>
                     </div>
                 </div>

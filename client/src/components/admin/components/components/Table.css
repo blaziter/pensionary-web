@@ -1,3 +1,14 @@
+.table-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 672px;
+}
+
+.admin-table {
+    max-width: fit-content;
+    align-self: center;
+}
+
 .button-holder {
     display: flex;
     justify-content: flex-start;
@@ -29,4 +40,36 @@
 
 .float-right {
     float: right;
+}
+
+.table-pagination {
+    display: flex;
+    max-width: fit-content;
+    min-width: min-content;
+    justify-content: center;
+    margin: 0 !important;
+    align-self: center;
+}
+
+.pagination-link.is-current {
+    background-color: var(--essential-color) !important;
+    color: var(--white);
+    border-color: var(--essential-color);
+}
+
+.table-pagination-previous {
+    order: 1;
+    text-decoration: none;
+}
+
+.table-pagination-next {
+    order: 3;
+    text-decoration: none;
+}
+
+.table-pagination-list {
+    order: 2;
+    padding-left: 0;
+    align-items: center;
+    margin-bottom: 0;
 }
