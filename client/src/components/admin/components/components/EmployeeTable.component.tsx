@@ -9,9 +9,25 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import EmployeeModal from './components/EmployeeModal';
 
-const EmployeeTable = () => {
-    const { role, page } = useParams();
-    const [employees, setEmployees] = useState(['ahoj']);
+interface Table {
+    role: any;
+    page: any;
+}
+
+interface Employee {
+    ID: string;
+    EMPLOYEEID: string;
+    PREFIX: string;
+    SUFFIX: string;
+    NAME: string;
+    ROLE: string;
+    AVAILABILITY: number;
+    WORKPLACE: string;
+    SHIFT: string;
+}
+
+const EmployeeTable = ({ role, page }: Table) => {
+    const [employees, setEmployees] = useState<Employee[]>([]);
     const [modal, setModal] = useState(false);
     const [deleteEmployee, setDeleteEmployee] = useState({});
     const [redir, setRedir] = useState(false);
@@ -22,6 +38,7 @@ const EmployeeTable = () => {
         axios.defaults.withCredentials = true;
         axios.get(`${import.meta.env.VITE_API_URL}/employee/all`)
             .then(res => setEmployees(res.data))
+        return
     }, []);
 
     useEffect(() => {
@@ -29,8 +46,8 @@ const EmployeeTable = () => {
         setRedir(false)
         let length = Math.ceil(employees.length / 10);
         setMaxLength(length);
-        console.log(maxLength)
-    }, [role])
+        return
+    }, [])
 
     return (
         <>
@@ -50,39 +67,39 @@ const EmployeeTable = () => {
                             </div>
                             <table className='table admin-table'>
                                 <thead>
-                                    <th>Akademický titul</th>
-                                    <th>Neakademický titul</th>
-                                    <th>Jméno a příjmení</th>
-                                    <th>Role</th>
-                                    <th>Dostupnost</th>
-                                    <th>Pracoviště</th>
-                                    <th>Směna</th>
-                                    <th>Správa</th>
+                                    <tr>
+                                        <th>Akademický titul</th>
+                                        <th>Neakademický titul</th>
+                                        <th>Jméno a příjmení</th>
+                                        <th>Role</th>
+                                        <th>Dostupnost</th>
+                                        <th>Pracoviště</th>
+                                        <th>Směna</th>
+                                        <th>Správa</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {
                                         employees.map(employee => {
                                             if (employee.ROLE == role) return (
-                                                <>
-                                                    <tr key={employee.EMPLOYEEID}>
-                                                        <td><p className='admin-value'>{employee.PREFIX}</p></td>
-                                                        <td><p className='admin-value'>{employee.SUFFIX}</p></td>
-                                                        <td><p className='admin-value'>{employee.NAME}</p></td>
-                                                        <td><p className='admin-value'>{employee.ROLE == 'doctor' ? 'Doktor/ka' : 'Sestra'}</p></td>
-                                                        <td><p className='admin-value'>{employee.AVAILABILITY == 1 ? 'Dostupný/á' : 'Nedostupný/á'}</p></td>
-                                                        <td><p className='admin-value'>{employee.WORKPLACE}</p></td>
-                                                        <td><p className='admin-value'>{employee.SHIFT}</p></td>
-                                                        <td>
-                                                            <div className='button-holder'>
-                                                                <Link to={`edit/${employee.EMPLOYEEID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
-                                                                <button className='button admin-edit' onClick={() => {
-                                                                    setDeleteEmployee(employee);
-                                                                    setModal(true)
-                                                                }}><AiFillDelete /></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </>
+                                                <tr key={employee.EMPLOYEEID}>
+                                                    <td><p className='admin-value'>{employee.PREFIX}</p></td>
+                                                    <td><p className='admin-value'>{employee.SUFFIX}</p></td>
+                                                    <td><p className='admin-value'>{employee.NAME}</p></td>
+                                                    <td><p className='admin-value'>{employee.ROLE == 'doctor' ? 'Doktor/ka' : 'Sestra'}</p></td>
+                                                    <td><p className='admin-value'>{employee.AVAILABILITY == 1 ? 'Dostupný/á' : 'Nedostupný/á'}</p></td>
+                                                    <td><p className='admin-value'>{employee.WORKPLACE == 'village' ? 'Vesnička' : employee.WORKPLACE == 'first-floor' ? 'První patro' : employee.WORKPLACE == 'ground-floor' ? 'Přízemí' : null}</p></td>
+                                                    <td><p className='admin-value'>{employee.SHIFT == 'day' ? 'Denní' : 'Noční'}</p></td>
+                                                    <td>
+                                                        <div className='button-holder'>
+                                                            <Link to={`edit/${employee.EMPLOYEEID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
+                                                            <button className='button admin-edit' onClick={() => {
+                                                                setDeleteEmployee(employee);
+                                                                setModal(true)
+                                                            }}><AiFillDelete /></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             )
                                         })
                                     }
@@ -93,16 +110,16 @@ const EmployeeTable = () => {
                 </div>
                 <nav className='pagination table-pagination' role='navigation' aria-label='pagination'>
                     {
-                        parseInt(page) != 1 ? <a className='pagination-previous table-pagination-previous' onClick={e => navigate('page/' + (parseInt(page) - 1))}>Previous</a> : <></>
+                        parseInt(page) != 1 ? <a className='pagination-previous table-pagination-previous' onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) - 1))}>Previous</a> : <></>
                     }
                     {
-                        parseInt(page) != maxLength ? <a className='pagination-next table-pagination-next' onClick={e => navigate('page/' + (parseInt(page) + 1))}>Next page</a> : <></>
+                        parseInt(page) != maxLength && maxLength > 1 ? <a className='pagination-next table-pagination-next' onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) + 1))}>Next page</a> : <></>
                     }
                     <ul className='pagination-list table-pagination-list'>
                         {
                             parseInt(page) > 1 &&
                             <li>
-                                <p className='pagination-link' aria-label='Goto page 1'>1</p>
+                                <p className='pagination-link' aria-label='Goto page 1' onClick={e => navigate(`/table/${role}/page/` + 1)}>1</p>
                             </li>
                         }
                         {
@@ -117,7 +134,7 @@ const EmployeeTable = () => {
                                 {
                                     parseInt(page) > 2 &&
                                     <li>
-                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) - 1)}>{parseInt(page) - 1}</p>
+                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) - 1)} onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) - 1))}>{parseInt(page) - 1}</p>
                                     </li>
                                 }
                             </>
@@ -131,7 +148,7 @@ const EmployeeTable = () => {
                                 {
                                     parseInt(page) < maxLength - 1 &&
                                     <li>
-                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) + 1)}>{parseInt(page) + 1}</p>
+                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) + 1)} onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) + 1))}>{parseInt(page) + 1}</p>
                                     </li>
                                 }
                                 {
@@ -145,7 +162,7 @@ const EmployeeTable = () => {
                         {
                             parseInt(page) < maxLength &&
                             <li>
-                                <p className='pagination-link' aria-label={`Goto page ` + maxLength}>{maxLength}</p>
+                                <p className='pagination-link' aria-label={`Goto page ` + maxLength} onClick={e => navigate(`/table/${role}/page/${maxLength}`)}>{maxLength}</p>
                             </li>
                         }
                     </ul>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AdminTable from "./AdminTable.component";
 import EventTable from "./EventTable.component";
@@ -6,12 +6,12 @@ import EmployeeTable from "./EmployeeTable.component";
 import AdministrationTable from "./AdministrationTable.component";
 
 const Table = () => {
-    const { role } = useParams();
+    const { role, page } = useParams()
 
-    if (role == 'admin') return <AdminTable />
-    if (role == 'announcements') return <EventTable />
-    if (role == 'administration') return <AdministrationTable />
-    if (role == 'doctor' || role == 'nurse') return <EmployeeTable />
+    if (role == 'admin') return <AdminTable role={role} page={page} />
+    if (role == 'announcements') return <EventTable role={role} page={page} />
+    if (role == 'administration') return <AdministrationTable role={role} page={page} />
+    if (role == 'doctor' || role == 'nurse') return <EmployeeTable role={role} page={page} />
 
     return <></>
 }

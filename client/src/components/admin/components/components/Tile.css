@@ -5,12 +5,16 @@
     min-width: 367.45px;
 }
 
-.dashboard-tile:hover {
+.dashboard-tile-child:hover {
     cursor: pointer;
 }
 
 .dashboard-tile {
     justify-content: center;
+}
+
+.tile.is-ancestor {
+    flex-wrap: wrap;
 }
 
 @media screen and (max-width: 768px) {

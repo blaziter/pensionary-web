@@ -7,6 +7,7 @@ interface ModalProps {
         ID: number;
         ANNOUNCEMENTID: string;
         TITLE: string;
+        ANNOUNCEMENT: string;
     }
 }
 

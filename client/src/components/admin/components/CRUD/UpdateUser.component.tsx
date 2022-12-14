@@ -1,16 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Menu from '../Menu';
 import Nav from '../Nav';
 
 const Update = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [edit, setEdit] = useState({
         USERID: '',
         USERNAME: '',
         PASSWORD: ''
     });
+    const [status, setStatus] = useState('');
+    const [redir, setRedir] = useState(false);
 
     useEffect(() => {
         axios.defaults.withCredentials = true;
@@ -29,13 +32,19 @@ const Update = () => {
         axios.defaults.withCredentials = true;
         axios.put(`${import.meta.env.VITE_API_URL}/user/${edit.USERID}`, edit, { withCredentials: true })
             .then(async res => {
-                const data = await res.data;
-                console.log(data)
+                setStatus('success')
+                setTimeout(() => {
+                    setRedir(true);
+                }, 3000)
+            })
+            .catch(err => {
+                setStatus('error')
             })
     }
 
     return (
         <>
+            {redir ? navigate(-1) : null}
             <Nav />
             <div className='section admin-layout'>
                 <div className='columns'>
@@ -57,7 +66,10 @@ const Update = () => {
                                 </div>
                             </div>
                         </form>
-                        <button className='button crud float-right'>{`Upravit ${edit.USERNAME}`}</button>
+                        {
+                            status == 'success' ? <p className='has-text-success'>Uživatel byl úspěšně upraven, přesměrování bude za 3 sekundy</p> : status == 'error' ? <p className='has-text-danger'>Nezdařila se úprava uživatele</p> : null
+                        }
+                        <button className='button crud float-right' disabled={status == 'success' ? true : false}>{`Upravit ${edit.USERNAME}`}</button>
                     </div>
                 </div>
             </div>

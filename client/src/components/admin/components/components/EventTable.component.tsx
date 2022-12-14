@@ -8,9 +8,19 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import EventModal from './components/EventModal';
 
-const EventTable = () => {
-    const { role, page } = useParams();
-    const [announcements, setAnnouncements] = useState([]);
+interface Table {
+    role: any;
+    page: any;
+}
+
+interface Announcement {
+    ANNOUNCEMENTID: string;
+    TITLE: string;
+    ANNOUNCEMENT: string;
+}
+
+const EventTable = ({ role, page }: Table) => {
+    const [announcements, setAnnouncements] = useState<Announcement[]>([]);
     const [modal, setModal] = useState(false);
     const [deleteAnnouncement, setDeleteAnnouncement] = useState({});
     const [redir, setRedir] = useState(false);
@@ -20,15 +30,19 @@ const EventTable = () => {
     useEffect(() => {
         axios.defaults.withCredentials = true;
         axios.get(`${import.meta.env.VITE_API_URL}/announcement/all`)
-            .then(async res => setAnnouncements(await res.data))
+            .then(async res => {
+                setAnnouncements(await res.data)
+                setMaxLength(Math.ceil(await res.data.length / 10));
+            })
+        return
     }, []);
 
     useEffect(() => {
         if (page < 1 || page == undefined) return setRedir(true);
         setRedir(false)
         setMaxLength(Math.ceil(announcements.length / 10));
-        console.log(maxLength)
-    }, [role])
+        return
+    }, [maxLength])
 
     return (
         <>
@@ -48,9 +62,11 @@ const EventTable = () => {
                             </div>
                             <table className='table admin-table'>
                                 <thead>
-                                    <th>Název události</th>
-                                    <th>Popis události</th>
-                                    <th>Správa</th>
+                                    <tr>
+                                        <th>Název události</th>
+                                        <th>Popis události</th>
+                                        <th>Správa</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {
@@ -59,7 +75,7 @@ const EventTable = () => {
                                             return (
                                                 <tr key={announcement.ANNOUNCEMENTID}>
                                                     <td><p className='admin-value'>{announcement.TITLE}</p></td>
-                                                    <td><p className='admin-value'>{announcement.ANNOUNCEMENT}</p></td>
+                                                    <td><p className='admin-value announcement-text'>{announcement.ANNOUNCEMENT}</p></td>
                                                     <td>
                                                         <div className='button-holder'>
                                                             <Link to={`/admin/edit-event/${announcement.ANNOUNCEMENTID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
@@ -80,16 +96,16 @@ const EventTable = () => {
                 </div>
                 <nav className='pagination table-pagination' role='navigation' aria-label='pagination'>
                     {
-                        parseInt(page) != 1 ? <a className='pagination-previous table-pagination-previous' onClick={e => navigate('page/' + (parseInt(page) - 1))}>Previous</a> : <></>
+                        parseInt(page) != 1 ? <a className='pagination-previous table-pagination-previous' onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) - 1))}>Previous</a> : <></>
                     }
                     {
-                        parseInt(page) != maxLength ? <a className='pagination-next table-pagination-next' onClick={e => navigate('page/' + (parseInt(page) + 1))}>Next page</a> : <></>
+                        parseInt(page) != maxLength && maxLength > 1 ? <a className='pagination-next table-pagination-next' onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) + 1))}>Next page</a> : <></>
                     }
                     <ul className='pagination-list table-pagination-list'>
                         {
                             parseInt(page) > 1 &&
                             <li>
-                                <p className='pagination-link' aria-label='Goto page 1'>1</p>
+                                <p className='pagination-link' aria-label='Goto page 1' onClick={e => navigate(`/table/${role}/page/` + 1)}>1</p>
                             </li>
                         }
                         {
@@ -104,7 +120,7 @@ const EventTable = () => {
                                 {
                                     parseInt(page) > 2 &&
                                     <li>
-                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) - 1)}>{parseInt(page) - 1}</p>
+                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) - 1)} onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) - 1))}>{parseInt(page) - 1}</p>
                                     </li>
                                 }
                             </>
@@ -118,7 +134,7 @@ const EventTable = () => {
                                 {
                                     parseInt(page) < maxLength - 1 &&
                                     <li>
-                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) + 1)}>{parseInt(page) + 1}</p>
+                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) + 1)} onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) + 1))}>{parseInt(page) + 1}</p>
                                     </li>
                                 }
                                 {
@@ -132,7 +148,7 @@ const EventTable = () => {
                         {
                             parseInt(page) < maxLength &&
                             <li>
-                                <p className='pagination-link' aria-label={`Goto page ` + maxLength}>{maxLength}</p>
+                                <p className='pagination-link' aria-label={`Goto page ` + maxLength} onClick={e => navigate(`/table/${role}/page/${maxLength}`)}>{maxLength}</p>
                             </li>
                         }
                     </ul>

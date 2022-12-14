@@ -13,24 +13,7 @@ interface Employee {
 }
 
 const StaffStatus = () => {
-    const [staff, setStaff] = useState([
-        {
-            prefix: 'Dr.',
-            suffix: '',
-            firstName: 'Jan',
-            lastName: 'Novák',
-            role: 'doctor',
-            availability: true
-        },
-        {
-            prefix: 'Dr.',
-            suffix: '',
-            firstName: 'Jan',
-            lastName: 'Novák',
-            role: 'doctor',
-            availability: true
-        }
-    ]);
+    const [staff, setStaff] = useState([] as Employee[]);
     const [currentDate, setCurrentDate] = useState('');
     const [currentTime, setCurrentTime] = useState('');
 

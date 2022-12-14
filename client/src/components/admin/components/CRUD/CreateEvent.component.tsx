@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Menu from '../Menu';
 import Nav from '../Nav';
 
 const CreateEvent = () => {
+    const navigate = useNavigate();
     const [announcement, setAnnouncement] = useState({
         TITLE: '',
         ANNOUNCEMENT: ''
@@ -11,6 +13,8 @@ const CreateEvent = () => {
     const [warning, setWarning] = useState(false);
     const [errTitle, setErrTitle] = useState(false);
     const [errAnnouncement, setErrAnnouncement] = useState(false);
+    const [status, setStatus] = useState('');
+    const [redir, setRedir] = useState(false);
 
     const handleChange = (e: any) => {
         setAnnouncement({ ...announcement, [e.target.name]: e.target.value })
@@ -29,12 +33,21 @@ const CreateEvent = () => {
         axios.defaults.withCredentials = true;
         axios.post(`${import.meta.env.VITE_API_URL}/announcement/new`, announcement, { withCredentials: true })
             .then(res => {
-                console.log(res);
+                if (res.status == 200) {
+                    setStatus('success');
+                    setTimeout(() => {
+                        setRedir(true);
+                    }, 3000)
+                }
+            })
+            .catch(err => {
+                setStatus('error');
             })
     }
 
     return (
         <>
+            {redir ? navigate(-1) : null}
             <Nav />
             <div className='section admin-layout'>
                 <div className='columns'>
@@ -68,8 +81,9 @@ const CreateEvent = () => {
                         {warning && <p className='has-text-danger'>Popis události nesmí být delší než 255 znaků!</p>}
                         {errTitle ? <p className='has-text-danger'>Název události nesmí být prázdný!</p> : null}
                         {errAnnouncement ? <p className='has-text-danger'>Popis události nesmí být prázdný!</p> : null}
+                        {status == 'success' ? <p className='has-text-success'>Událost byla úspěšně přidána, přesměrování bude za 3 sekundy</p> : status == 'error' ? <p className='has-text-danger'>Nepodařilo se přidat událost</p> : null}
 
-                        <button className='button crud float-right margin-top-10px' onClick={handleSubmit}>
+                        <button className='button crud float-right margin-top-10px' onClick={handleSubmit} disabled={status == 'success' ? true : false}>
                             Vytvořit událost
                         </button>
                     </div>

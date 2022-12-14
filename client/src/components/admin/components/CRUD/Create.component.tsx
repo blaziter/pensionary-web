@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Menu from '../Menu';
 import Nav from '../Nav';
 
 const Create = () => {
+    const navigate = useNavigate();
     const [employee, setEmployee] = useState({
         suffix: '',
         prefix: '',
@@ -26,6 +28,8 @@ const Create = () => {
     const [errShift, setErrShift] = useState(false)
     const [errWorkplace, setErrWorkplace] = useState(false)
     const [errRole, setErrRole] = useState(false)
+    const [status, setStatus] = useState('')
+    const [redir, setRedir] = useState(false);
 
     const [mode, setMode] = useState('employee');
 
@@ -50,17 +54,34 @@ const Create = () => {
         mode != 'admin' ?
             axios.post(`${import.meta.env.VITE_API_URL}/employee/new`, employee, { withCredentials: true })
                 .then(res => {
-                    console.log(res);
+                    if (res.status == 200) {
+                        setStatus('success');
+                        setTimeout(() => {
+                            setRedir(true);
+                        }, 3000)
+                    }
+                })
+                .catch(err => {
+                    setStatus('error');
                 })
             :
             axios.post(`${import.meta.env.VITE_API_URL}/user/new`, user, { withCredentials: true })
                 .then(res => {
-                    console.log(res);
+                    if (res.status == 200) {
+                        setStatus('success');
+                        setTimeout(() => {
+                            setRedir(true);
+                        }, 3000)
+                    }
+                })
+                .catch(err => {
+                    setStatus('error');
                 })
     }
 
     return (
         <>
+            {redir ? navigate(-1) : null}
             <Nav />
             <div className='section admin-layout'>
                 <div className='columns'>
@@ -194,8 +215,9 @@ const Create = () => {
                         {errRole ? <p className='has-text-danger'>Vyberte roli</p> : null}
                         {errShift ? <p className='has-text-danger'>Vyberte směnu</p> : null}
                         {errWorkplace ? <p className='has-text-danger'>Vyberte oddělení</p> : null}
-                        
-                        <button className='button crud float-right' onClick={add}>{mode != 'admin' ? 'Přidat zaměstnance' : 'Přidat správce'}</button>
+                        {status == 'success' ? mode == 'admin' ? <p className='has-text-success'>Správce byl úspěšně přidán, přesměrování bude za 3 sekundy</p> : <p className='has-text-success'>Zaměstnanec/zaměstnankyně byl/a úspěšně přidán/a, přesměrování bude za 3 sekundy</p> : status == 'error' ? <p className='has-text-danger'>Přidání zaměstnance/zaměstnankyně se nezdařilo</p> : null}
+
+                        <button className='button crud float-right' onClick={add} disabled={status == 'success' ? true : false}>{mode != 'admin' ? 'Přidat zaměstnance/zaměstnankyni' : 'Přidat správce'}</button>
                     </div>
                 </div>
             </div>

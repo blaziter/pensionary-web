@@ -73,3 +73,11 @@
     align-items: center;
     margin-bottom: 0;
 }
+
+.announcement-text {
+    line-height: 40.5px;
+    max-width: 250px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

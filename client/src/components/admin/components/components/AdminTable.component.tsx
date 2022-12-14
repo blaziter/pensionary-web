@@ -13,9 +13,19 @@ interface Admin {
     USERNAME: string;
 }
 
-const AdminTable = () => {
-    const { role, page } = useParams();
-    const [admins, setAdmins] = useState([]);
+interface Table {
+    role: any;
+    page: any;
+}
+
+interface Admin {
+    ID: string;
+    USERID: string;
+    USERNAME: string;
+}
+
+const AdminTable = ({ role, page }: Table) => {
+    const [admins, setAdmins] = useState<Admin[]>([]);
     const [modal, setModal] = useState(false);
     const [deleteAdmin, setDeleteAdmin] = useState({});
     const [redir, setRedir] = useState(false);
@@ -26,14 +36,15 @@ const AdminTable = () => {
         axios.defaults.withCredentials = true;
         axios.get(`${import.meta.env.VITE_API_URL}/user/all`)
             .then(async res => setAdmins(await res.data))
+        return
     }, []);
 
     useEffect(() => {
         if (page < 1 || page == undefined) return setRedir(true);
         setRedir(false)
         setMaxLength(Math.ceil(admins.length / 10));
-        console.log(maxLength)
-    }, [role])
+        return
+    }, [])
 
     return (
         <>
@@ -53,9 +64,11 @@ const AdminTable = () => {
                             </div>
                             <table className='table admin-table'>
                                 <thead>
-                                    <th>Uživatelské jméno</th>
-                                    <th>Role</th>
-                                    <th>Správa</th>
+                                    <tr>
+                                        <th>Uživatelské jméno</th>
+                                        <th>Role</th>
+                                        <th>Správa</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {
@@ -85,16 +98,16 @@ const AdminTable = () => {
                 </div>
                 <nav className='pagination table-pagination' role='navigation' aria-label='pagination'>
                     {
-                        parseInt(page) != 1 ? <a className='pagination-previous table-pagination-previous' onClick={e => navigate('page/' + (parseInt(page) - 1))}>Previous</a> : <></>
+                        parseInt(page) != 1 ? <a className='pagination-previous table-pagination-previous' onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) - 1))}>Previous</a> : <></>
                     }
                     {
-                        parseInt(page) != maxLength ? <a className='pagination-next table-pagination-next' onClick={e => navigate('page/' + (parseInt(page) + 1))}>Next page</a> : <></>
+                        parseInt(page) != maxLength && maxLength > 1 ? <a className='pagination-next table-pagination-next' onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) + 1))}>Next page</a> : <></>
                     }
                     <ul className='pagination-list table-pagination-list'>
                         {
                             parseInt(page) > 1 &&
                             <li>
-                                <p className='pagination-link' aria-label='Goto page 1'>1</p>
+                                <p className='pagination-link' aria-label='Goto page 1' onClick={e => navigate(`/table/${role}/page/` + 1)}>1</p>
                             </li>
                         }
                         {
@@ -109,7 +122,7 @@ const AdminTable = () => {
                                 {
                                     parseInt(page) > 2 &&
                                     <li>
-                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) - 1)}>{parseInt(page) - 1}</p>
+                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) - 1)} onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) - 1))}>{parseInt(page) - 1}</p>
                                     </li>
                                 }
                             </>
@@ -123,7 +136,7 @@ const AdminTable = () => {
                                 {
                                     parseInt(page) < maxLength - 1 &&
                                     <li>
-                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) + 1)}>{parseInt(page) + 1}</p>
+                                        <p className='pagination-link' aria-label={`Goto page ` + (parseInt(page) + 1)} onClick={e => navigate(`/table/${role}/page/` + (parseInt(page) + 1))}>{parseInt(page) + 1}</p>
                                     </li>
                                 }
                                 {
@@ -137,7 +150,7 @@ const AdminTable = () => {
                         {
                             parseInt(page) < maxLength &&
                             <li>
-                                <p className='pagination-link' aria-label={`Goto page ` + maxLength}>{maxLength}</p>
+                                <p className='pagination-link' aria-label={`Goto page ` + maxLength} onClick={e => navigate(`/table/${role}/page/${maxLength}`)}>{maxLength}</p>
                             </li>
                         }
                     </ul>
