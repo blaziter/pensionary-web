@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import authRouter from './routes/auth.route';
 import employeeRouter from './routes/employee.route';
 import announcementRouter from './routes/announcement.route';
+import externalRouter from './routes/external.route';
 import userRouter from './routes/user.routes';
 
 const cookieParser = require('cookie-parser');
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 //ROUTES
 app.use('/api/auth', authRouter);
+app.use('/api/external', externalRouter);
 
 app.use(authentication);
 

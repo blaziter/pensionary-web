@@ -4,12 +4,13 @@ import { BsCheckLg, BsFillInfoCircleFill } from 'react-icons/bs';
 import Footer from '../footer/Footer';
 
 interface Employee {
-    prefix: string;
-    suffix: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-    availability: boolean;
+    PREFIX: string;
+    SUFFIX: string;
+    NAME: string;
+    ROLE: string;
+    AVAILABILITY: number;
+    SHIFT: string;
+    WORKPLACE: string;
 }
 
 const StaffStatus = () => {
@@ -18,18 +19,16 @@ const StaffStatus = () => {
     const [currentTime, setCurrentTime] = useState('');
 
     useEffect(() => {
-        /*let finished = false;
-        axios.get(`${import.meta.env.VITE_.REACT_APP_API_URL}/employees`)
+        let finished = false;
+        axios.get(`${import.meta.env.VITE_API_URL}/external/all`)
             .then(async (res) => {
-                const data = await res.data;
-                await setStaff(data);
-                console.log(staff);
+                setStaff(await res.data);
             });
 
         return () => {
             finished = true;
-        }*/
-    }, [staff]);
+        }
+    }, []);
 
     // useEffect update every second
     useEffect(() => {
@@ -42,6 +41,7 @@ const StaffStatus = () => {
 
     return (
         <>
+            {console.log(staff)}
             <div className='status-container has-text-centered font'>
                 <div className='containers directors-container'>
                     <article className='message is-danger'>
@@ -50,26 +50,17 @@ const StaffStatus = () => {
                         </div>
                         <div className='message-body'>
                             <div className='directors'>
-                                <div className='director'>
-                                    <p className='director-role'>Ředitelka</p>
-                                    <p className='director-name'>Bc. {'Renata'.charAt(0)}. Poláková DiS.</p>
-                                    <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
-                                </div>
-                                <div className='director'>
-                                    <p className='director-role'>Zást. ředitele</p>
-                                    <p className='director-name'>{'Iva'.charAt(0)}. Čermáková</p>
-                                    <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
-                                </div>
-                                <div className='director'>
-                                    <p className='director-role'>Vedoucí sestra</p>
-                                    <p className='director-name'>{'Sigmund'.charAt(0)}. Rigová</p>
-                                    <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
-                                </div>
-                                <div className='director'>
-                                    <p className='director-role'>Sociální pracov.</p>
-                                    <p className='director-name'>Bc. {'Klára'.charAt(0)}. Svobodová</p>
-                                    <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
-                                </div>
+                                {
+                                    staff.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse').map((employee) => {
+                                        return (
+                                            <div className='director'>
+                                                <p className='director-role'>{employee.ROLE == 'chairman' ? 'Ředitel/ka' : employee.ROLE == 'vice chairman' ? 'Zástupce ředitele' : employee.ROLE == 'head nurse' ? 'Vedoucí sestra' : employee.ROLE == 'social worker' ? 'Sociální pracovník' : null}</p>
+                                                <p className='director-name'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]}</p>
+                                                <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </article>
