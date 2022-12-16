@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BsCheckLg, BsFillInfoCircleFill } from 'react-icons/bs';
+import { BsCheckLg, BsFillInfoCircleFill, BsXLg } from 'react-icons/bs';
 import Footer from '../footer/Footer';
 
 interface Employee {
@@ -44,155 +44,155 @@ const StaffStatus = () => {
             {console.log(staff)}
             <div className='status-container has-text-centered font'>
                 <div className='containers directors-container'>
-                    <article className='message is-danger'>
-                        <div className='message-header'>
+                    <div className='card'>
+                        <div className='card-header'>
                             <div className='date-holder'><p className='date'>Dnešní datum: </p> <p className='date'>{currentDate}</p> <p className='date time'>{currentTime}</p></div>
                         </div>
-                        <div className='message-body'>
-                            <div className='directors'>
-                                {
-                                    staff.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse').map((employee) => {
-                                        return (
-                                            <div className='director'>
-                                                <p className='director-role'>{employee.ROLE == 'chairman' ? 'Ředitel/ka' : employee.ROLE == 'vice chairman' ? 'Zástupce ředitele' : employee.ROLE == 'head nurse' ? 'Vedoucí sestra' : employee.ROLE == 'social worker' ? 'Sociální pracovník' : null}</p>
-                                                <p className='director-name'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]}</p>
-                                                <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
-                                            </div>
-                                        )
-                                    })
-                                }
+                        <div className='card-content'>
+                            <div className="content">
+                                <div className='card'>
+                                    {
+                                        staff.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse').map((employee) => {
+                                            return (
+                                                <div className='director'>
+                                                    <p className='director-role'>{employee.ROLE == 'chairman' ? 'Ředitel/ka' : employee.ROLE == 'vice chairman' ? 'Zástupce ředitele' : employee.ROLE == 'head nurse' ? 'Vedoucí sestra' : employee.ROLE == 'social worker' ? 'Sociální pracovník' : null}</p>
+                                                    <p className='director-name'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]}</p>
+                                                    {
+                                                        employee.AVAILABILITY == 1 ?
+                                                            <>
+                                                                <p className='employee-text available'>Dostupný/á</p><BsCheckLg className='employee-text available' size='1.5em' />
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <p className='employee-text unavailable'>Nedostupný/á</p><BsXLg className='employee-text unavailable' size='1.5em' />
+                                                            </>
+                                                    }
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
                 <div className='containers general-nurse'>
-                    <article className='message is-warning'>
-                        <div className='message-header'>
+                    <div className='card'>
+                        <div className='card-header'>
                             <p>Všeobecné sestry</p>
                         </div>
-                        <div className='message-body'>
-                            <div className='general-nurse-info'>
-                                <div className="day">
-                                    <div className="day-title">Denní</div>
-                                    <div className="day-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Dana'.charAt(0)}. Lehká</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Adéla'.charAt(0)}. Mrkáčková</p>
+                        <div className='card-content'>
+                            <div className="content">
+                                <div className='general-nurse-info'>
+                                    <div className="card status-items">
+                                        <div className="day-title">Denní</div>
+                                        <div className="day-body">
+                                            {
+                                                
+                                            }
                                         </div>
                                     </div>
-                                </div>
-                                <div className="night">
-                                    <div className="night-title">Noční</div>
-                                    <div className="night-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Markéta'.charAt(0)}. Králíková</p>
+                                    <div className="card status-items">
+                                        <div className="night-title">Noční</div>
+                                        <div className="night-body">
+                                            {
+
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
                 <div className='containers village'>
-                    <article className='message is-danger'>
-                        <div className='message-header'>
-                            <p>Vesnička</p> <p>Vedoucí oddělení: {'Martina'.charAt(0)}. Kubešová</p>
+                    <div className='card'>
+                        <div className='card-header'>
+                            <p>Vesnička</p> <p>Vedoucí oddělení: { }</p>
                         </div>
-                        <div className='message-body'>
-                            <div className='general-nurse-info'>
-                                <div className="day">
-                                    <div className="day-title">Denní</div>
-                                    <div className="day-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová, {'Jana'.charAt(0)}. Bartoňová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová, {'Eva'.charAt(0)}. Martincová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Kateřina'.charAt(0)}. Peřinková</p>
+                        <div className='card-content'>
+                            <div className="content">
+                                <div className='general-nurse-info'>
+                                    <div className="card status-items">
+                                        <div className="cart-content">
+                                            <div className="content">
+                                                <div className="day-title">Denní</div>
+                                                <div className="day-body">
+                                                    {
+
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="night">
-                                    <div className="night-title">Noční</div>
-                                    <div className="night-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Simona'.charAt(0)}. Potměšilová</p>
+                                    <div className="card status-items">
+                                        <div className="night-title">Noční</div>
+                                        <div className="night-body">
+                                            {
+
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
                 <div className='containers first-floor'>
-                    <article className='message is-warning'>
-                        <div className='message-header'>
-                            <p>1. patro</p> <p>Vedoucí oddělení: </p>
+                    <div className='card is-warning'>
+                        <div className='card-header'>
+                            <p>1. patro</p> <p>Vedoucí oddělení: { }</p>
                         </div>
-                        <div className='message-body'>
-                            <div className='general-nurse-info'>
-                                <div className="day">
-                                    <div className="day-title">Denní</div>
-                                    <div className="day-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová, {'Jana'.charAt(0)}. Bartoňová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová</p>
+                        <div className='card-content'>
+                            <div className="content">
+                                <div className='general-nurse-info'>
+                                    <div className="card status-items">
+                                        <div className="day-title">Denní</div>
+                                        <div className="day-body">
+                                            {
+
+                                            }
                                         </div>
                                     </div>
-                                </div>
-                                <div className="night">
-                                    <div className="night-title">Noční</div>
-                                    <div className="night-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Simona'.charAt(0)}. Potměšilová</p>
+                                    <div className="card status-items">
+                                        <div className="night-title">Noční</div>
+                                        <div className="night-body">
+                                            {
+
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
                 <div className='containers ground-floor'>
-                    <article className='message is-danger'>
-                        <div className='message-header'>
-                            <p>Přízemí</p> <p>Vedoucí oddělení: </p>
+                    <div className='card'>
+                        <div className='card-header'>
+                            <p>Přízemí</p> <p>Vedoucí oddělení: { }</p>
                         </div>
-                        <div className='message-body'>
-                            <div className='general-nurse-info'>
-                                <div className="day">
-                                    <div className="day-title">Denní</div>
-                                    <div className="day-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Jana'.charAt(0)}. Petrová, {'Jana'.charAt(0)}. Bartoňová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Vanda'.charAt(0)}. Rolincová, {'Eva'.charAt(0)}. Martincová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Kateřina'.charAt(0)}. Peřinková</p>
-                                        </div>
+                        <div className='card-content'>
+                            <div className="content">
+                                <div className='general-nurse-info'>
+                                    <div className="card status-items">
+                                        <div className="day-title">Denní</div>
+                                        {
+
+                                        }
                                     </div>
-                                </div>
-                                <div className="night">
-                                    <div className="night-title">Noční</div>
-                                    <div className="night-body">
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Simona'.charAt(0)}. Potměšilová</p>
-                                        </div>
-                                        <div className='employee'>
-                                            <p className='employee-text'>{'Simona'.charAt(0)}. Potměšilová</p>
+                                    <div className="card status-items">
+                                        <div className="night-title">Noční</div>
+                                        <div className="night-body">
+                                            {
+
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
                 <Footer />
             </div>

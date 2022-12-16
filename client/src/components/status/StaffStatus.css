@@ -1,5 +1,4 @@
 #root:has(> .status-container) {
-    background-color: #feecf0;
     overflow: auto;
 }
 
@@ -87,6 +86,31 @@
     align-items: center;
 }
 
+.card.status-items {
+    align-self: stretch;
+}
+
+.containers {
+    padding: 0;
+    padding-bottom: 0.5em;
+}
+
+.card {
+    padding: 0 !important;
+}
+
+.card .card-content .content .card {
+    padding: 0.5em 0.75em !important;
+}
+
+.card .card-content .content .general-nurse-info {
+    padding: 0.5em 0.75em !important;
+}
+
+p {
+    margin-bottom: 18px !important;
+}
+
 #root > div > div.containers.ground-floor > article {
     border: 0;
 }
@@ -118,8 +142,8 @@
     }
 
     .director-role {
-        min-width: 300px;
-        max-width: 300px;
+        min-width: 350px;
+        max-width: 350px;
     }
 
     .director-name {
@@ -148,6 +172,24 @@
     }
     
     .message {
+        border-bottom: 0.3em solid #0d0d0d;
+        border-radius: 0;
+    }
+
+    .card-header {
+        font-size: 2.5rem;
+        justify-content: space-evenly;
+        padding: 0.25em 0.5em;
+    }
+    
+    .card-content {
+        font-size: 2rem;
+        justify-content: space;
+        padding: 0.5em 0.75em;
+        align-items: center;
+    }
+    
+    .card {
         border-bottom: 0.3em solid #0d0d0d;
         border-radius: 0;
     }

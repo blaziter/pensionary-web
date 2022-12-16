@@ -155,7 +155,9 @@ const Create = () => {
                                             <option value=''>Vybrat roli</option>
                                             <option value='admin'>Správce</option>
                                             <option value='doctor'>Doktor</option>
-                                            <option value='nurse'>Sestřička</option>
+                                            <option value='nurse'>Sestra</option>
+                                            <option value='general nurse'>Všeobecná sestra</option>
+                                            <option value='head nurse'>Vedoucí Sestra</option>
                                         </select>
                                     </div>
                                 </div>

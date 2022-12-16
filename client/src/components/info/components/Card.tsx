@@ -1,9 +1,10 @@
 interface CardProps {
     title: string;
     subtitle: string;
+    image: string;
 }
 
-const Card = ({ title, subtitle }: CardProps) => {
+const Card = ({ title, subtitle, image }: CardProps) => {
     return (
         <>
             <div className='card'>
@@ -11,7 +12,7 @@ const Card = ({ title, subtitle }: CardProps) => {
                     <div className='media'>
                         <div className='media-left'>
                             <figure className='image'>
-                                <img className='info-card-image' src='divine-hair-block.jpg' alt='Placeholder image' />
+                                <img className='info-card-image' src={image} alt='Placeholder image' />
                             </figure>
                         </div>
                         <div className='media-content info-card-content'>

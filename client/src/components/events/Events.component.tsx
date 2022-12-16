@@ -28,7 +28,7 @@ const Events = () => {
     });
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_.REACT_APP_API_URL}/events`)
+        axios.get(`${import.meta.env.VITE_API_URL}/events`)
             .then(async res => {
                 setEvents(await res.data);
             })
