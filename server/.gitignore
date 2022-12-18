@@ -53,6 +53,12 @@ typings/
 # Optional eslint cache
 .eslintcache
 
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
 # Optional REPL history
 .node_repl_history
 
@@ -69,11 +75,18 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# next.js build output
+# Next.js build output
 .next
 
-# nuxt.js build output
+# Nuxt.js build / generate output
 .nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and *not* Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
 
 # vuepress build output
 .vuepress/dist
@@ -84,23 +97,8 @@ typings/
 # FuseBox cache
 .fusebox/
 
-# .idea folder
-.idea
-
 # DynamoDB Local files
 .dynamodb/
-server/dist/models/index.js
-server/dist/models/Employee.js
-server/dist/index.js
-server/dist/controllers/employees.js
-server/dist/models/User.js
-server/dist/routes/employees.js
-server/dist/controllers/employee.js
-server/dist/routes/employee.js
-server/dist/controllers/employee.controller.js
-server/dist/controllers/user.controller.js
-server/dist/models/employee.model.js
-server/dist/models/index.model.js
-server/dist/models/user.model.js
-server/dist/routes/employee.route.js
-server/dist/routes/user.route.js
+
+# TernJS port file
+.tern-port
