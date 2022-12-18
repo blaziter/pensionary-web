@@ -1,52 +1,44 @@
-// @ts-nocheck
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import Menu from '../Menu';
-import Nav from '../Nav';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import EventModal from './components/EventModal';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import Menu from "../Menu";
+import Nav from "../Nav";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import EmployeeModal from "./components/EmployeeModal";
 
 interface Table {
     role: any;
     page: any;
 }
 
-interface Announcement {
-    ANNOUNCEMENTID: string;
-    TITLE: string;
-    ANNOUNCEMENT: string;
+interface Employee {
+    ID: number,
+    EMPLOYEEID: string,
+    PREFIX: string,
+    SUFFIX: string,
+    NAME: string,
+    ROLE: string,
+    AVAILABILITY: number,
+    WORKPLACE: string,
+    SHIFT: string,
 }
 
-const EventTable = ({ role, page }: Table) => {
-    const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+const InfoTable = ({ role, page }: Table) => {
+    const [employees, setEmployees] = useState<Employee[]>([]);
+    const [deleteEmployee, setDeleteEmployee] = useState<Employee>({} as Employee);
     const [modal, setModal] = useState(false);
-    const [deleteAnnouncement, setDeleteAnnouncement] = useState({});
     const [redir, setRedir] = useState(false);
-    const navigate = useNavigate();
     const [maxLength, setMaxLength] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.defaults.withCredentials = true;
-        axios.get(`${import.meta.env.VITE_API_URL}/announcement/all`)
-            .then(async res => {
-                setAnnouncements(await res.data)
-                setMaxLength(Math.ceil(await res.data.length / 10));
-            })
-        return
-    }, []);
-
-    useEffect(() => {
-        if (page < 1 || page == undefined) return setRedir(true);
-        setRedir(false)
-        setMaxLength(Math.ceil(announcements.length / 10));
-        return
-    }, [maxLength])
+        axios.get(`${import.meta.env.VITE_API_URL}/employee/all`)
+            .then(res => setEmployees(res.data))
+    }, [])
 
     return (
         <>
-            {redir && <Navigate to='page/1' replace />}
             <Nav />
             <div className='section admin-layout'>
                 <div className='columns'>
@@ -56,32 +48,35 @@ const EventTable = ({ role, page }: Table) => {
                     <div className='column is-10'>
                         <div className='table-container'>
                             <div>
-                                <Link to={`/admin/create-event`} className='no-deco'>
-                                    <button className='button add-employee float-right'>Přidat událost</button>
+                                <Link to={`/admin/create-team-member`} className='no-deco'>
+                                    <button className='button add-employee float-right'>Přidat člena týmu</button>
                                 </Link>
                             </div>
                             <table className='table admin-table'>
                                 <thead>
                                     <tr>
-                                        <th>Název události</th>
-                                        <th>Popis události</th>
+                                        <th>Akademický titul</th>
+                                        <th>Neakademický titul</th>
+                                        <th>Jméno a příjmení</th>
+                                        <th>Role</th>
                                         <th>Správa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                        // slice(10 * (page - 1), 10 * page)
-                                        announcements && announcements.slice(10 * (page - 1), 10 * page).map(announcement => {
+                                        employees.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse' && employee.ROLE != 'chairman' && employee.ROLE != 'vice chairman' && employee.ROLE != 'head nurse' && employee.ROLE != 'social worker').map(employee => {
                                             return (
-                                                <tr key={announcement.ANNOUNCEMENTID}>
-                                                    <td><p className='admin-value'>{announcement.TITLE}</p></td>
-                                                    <td><p className='admin-value announcement-text'>{announcement.ANNOUNCEMENT}</p></td>
+                                                <tr key={employee.EMPLOYEEID}>
+                                                    <td><p className='admin-value'>{employee.PREFIX}</p></td>
+                                                    <td><p className='admin-value'>{employee.SUFFIX}</p></td>
+                                                    <td><p className='admin-value'>{employee.NAME}</p></td>
+                                                    <td><p className='admin-value'>{employee.ROLE}</p></td>
                                                     <td>
                                                         <div className='button-holder'>
-                                                            <Link to={`/admin/edit-event/${announcement.ANNOUNCEMENTID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
+                                                            <Link to={`edit/${employee.EMPLOYEEID}`}><button className='button admin-edit'><AiFillEdit /></button></Link>
                                                             <button className='button admin-edit' onClick={() => {
-                                                                setDeleteAnnouncement(announcement);
-                                                                setModal(true);
+                                                                setDeleteEmployee(employee);
+                                                                setModal(true)
                                                             }}><AiFillDelete /></button>
                                                         </div>
                                                     </td>
@@ -155,10 +150,10 @@ const EventTable = ({ role, page }: Table) => {
                 </nav>
             </div>
             {
-                modal ? <EventModal className={modal ? 'is-active' : ''} announcement={deleteAnnouncement} /> : <></>
+                modal ? <EmployeeModal className={modal ? 'is-active' : ''} employee={deleteEmployee} onClick={() => { setModal(false) }} /> : null
             }
         </>
-    );
+    )
 }
 
-export default EventTable;
+export default InfoTable

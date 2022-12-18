@@ -39,7 +39,7 @@ const Info = () => {
                 <h1 className="title info-title">Info Náš tým</h1>
                 <progress className="progress is-danger is-large" value={time} max={max}></progress>
                 {
-                    data.map((contact : Contact) => {
+                    data && data.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse' && employee.ROLE != 'chairman' && employee.ROLE != 'vice chairman' && employee.ROLE != 'head nurse' && employee.ROLE != 'social worker').map((contact : Contact) => {
                         return(
                             <Card title={contact.NAME} subtitle={contact.ROLE} image={contact.IMAGENAME} />
                         )

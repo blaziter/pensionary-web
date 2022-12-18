@@ -12,4 +12,5 @@ export { default as Table } from '../components/admin/components/components/Tabl
 export { default as UpdateUser } from '../components/admin/components/CRUD/UpdateUser.component';
 export { default as CreateEvent } from '../components/admin/components/CRUD/CreateEvent.component';
 export { default as UpdateEvent } from '../components/admin/components/CRUD/UpdateEvent.component';
+export { default as CreateMember } from '../components/admin/components/CRUD/CreateMember.component';
 export { default as CreateBoardMember } from '../components/admin/components/CRUD/CreateBoardMember.component';

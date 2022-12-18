@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { ImStatsBars } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
-import { BiPlusMedical } from "react-icons/bi";
+import { RiTeamFill } from "react-icons/ri";
 import { GiMedicines } from "react-icons/gi";
+import { BiPlusMedical } from "react-icons/bi";
 import { MdSupervisedUserCircle } from "react-icons/md";
 import { BsFillCalendarEventFill } from "react-icons/bs";
 
@@ -31,6 +32,7 @@ const Menu = () => {
                             <li><Link className={role == 'doctor' ? 'menu-item active' : 'menu-item'} to='/table/doctor/page/1'><BiPlusMedical /> Lékaři</Link></li>
                             <li><Link className={role == 'nurse' ? 'menu-item active' : 'menu-item'} to='/table/nurse/page/1'><GiMedicines /> Sestřičky</Link></li>
                             <li><Link className={role == 'announcements' ? 'menu-item active' : 'menu-item'} to='/table/announcements/page/1'><BsFillCalendarEventFill /> Události</Link></li>
+                            <li><Link className={role == 'info' ? 'menu-item active' : 'menu-item'} to='/table/info/page/1'><RiTeamFill /> Členové týmu</Link></li>
                         </ul>
                     </li>
                 </ul>

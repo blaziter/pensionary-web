@@ -11,7 +11,7 @@ export const getAllUsers = (req: Request, res: Response) => {
         if (err) throw err;
     
         db.query('SELECT * FROM users', [], (err, result) => {
-            result = bufferParser(result);
+            if (result) result = bufferParser(result);
             res.status(200).send(result);
             db.detach();
         });
@@ -25,7 +25,7 @@ export const getUserById = (req: Request, res: Response) => {
         if (err) throw err;
     
         db.query('SELECT userId, username, password FROM users WHERE userId = ?', [userId], (err, result) => {
-            result = bufferParser(result);
+            if (result) result = bufferParser(result);
             res.status(200).send(result);
             db.detach();
         });

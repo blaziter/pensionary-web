@@ -10,7 +10,7 @@ export const getAllEmployees = (req: Request, res: Response) => {
         if (err) throw err;
     
         db.query('SELECT * FROM employee', [], (err, result) => {
-            result = bufferParser(result);
+            if (result) result = bufferParser(result);
             res.status(200).send(result);
             db.detach();
         });
@@ -115,7 +115,7 @@ export const getEmployeeByParams = (req: Request, res: Response) => {
                 return res.status(404).send('Nothing found');
             }
 
-            result = bufferParser(result);
+            if (result) result = bufferParser(result);
             res.status(200).send(result);
             db.detach();
         });

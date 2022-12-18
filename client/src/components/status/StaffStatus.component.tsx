@@ -52,7 +52,7 @@ const StaffStatus = () => {
                             <div className="content">
                                 <div className='card'>
                                     {
-                                        staff.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse').map((employee) => {
+                                        staff && staff.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse').map((employee) => {
                                             return (
                                                 <div className='director'>
                                                     <p className='director-role'>{employee.ROLE == 'chairman' ? 'Ředitel/ka' : employee.ROLE == 'vice chairman' ? 'Zástupce ředitele' : employee.ROLE == 'head nurse' ? 'Vedoucí sestra' : employee.ROLE == 'social worker' ? 'Sociální pracovník' : null}</p>

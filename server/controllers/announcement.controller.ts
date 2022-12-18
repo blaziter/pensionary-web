@@ -10,7 +10,7 @@ export const getAllAnnouncements = (req: Request, res: Response) => {
         if (err) throw err;
     
         db.query('SELECT * FROM announcements', [], (err, result) => {
-            result = bufferParser(result);
+            if (result) result = bufferParser(result);
             res.status(200).send(result);
             db.detach();
         });

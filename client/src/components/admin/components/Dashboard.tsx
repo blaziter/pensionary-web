@@ -56,6 +56,7 @@ const Dashboard = () => {
                 <Tile onClick={() => navigate('/table/nurse/page/1')} title='Sestřičky' subtitle={nurses}/>
                 <Tile onClick={() => navigate('/table/announcements/page/1')} title='Události' subtitle={announcements}/>
                 <Tile onClick={() => navigate('/table/admin/page/1')} title='Správci' subtitle={admins}/>
+                <Tile onClick={() => navigate('/table/info/page/1')} title='Členové týmu' subtitle={members.filter(employee => employee.ROLE != 'doctor' && employee.ROLE != 'nurse' && employee.ROLE != 'chairman' && employee.ROLE != 'vice chairman' && employee.ROLE != 'head nurse' && employee.ROLE != 'social worker').length}/>
             </div>
         </>
     );

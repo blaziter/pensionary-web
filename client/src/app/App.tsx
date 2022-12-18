@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Login, Status, Home, Admin, Table, EditMenu, Info, Events, Create, Update, CreateEvent, UpdateEvent, UpdateUser, CreateBoardMember } from '../pages/Pages';
+import { Login, Status, Home, Admin, Table, EditMenu, Info, Events, Create, Update, CreateEvent, UpdateEvent, UpdateUser, CreateBoardMember, CreateMember } from '../pages/Pages';
 
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
       <Route path='admin/create' element={<Create />} />
       <Route path='admin/create-event' element={<CreateEvent />} />
       <Route path='admin/create-member' element={<CreateBoardMember />} />
+      <Route path='admin/create-team-member' element={<CreateMember />} />
       <Route path='admin/edit/:id' element={<Update />} />
       <Route path='admin/edit-user/:id' element={<UpdateUser />} />
       <Route path='admin/edit-event/:id' element={<UpdateEvent />} />
