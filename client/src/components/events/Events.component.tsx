@@ -28,7 +28,7 @@ const Events = () => {
     });
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/events`)
+        axios.get(`${import.meta.env.VITE_API_URL}/announcement/all`)
             .then(async res => {
                 setEvents(await res.data);
             })
@@ -41,7 +41,7 @@ const Events = () => {
                 <h1 className="title info-title">Události</h1>
                 <progress className="progress is-danger is-large" value={time} max={max}></progress>
                 {
-                    events.map((event : annoucement) => {
+                    events.slice(0, 8).map((event : annoucement) => {
                         return(
                             <>
                                 <Event className={event.date ? 'is-warning' : 'is-primary'} key={event.title} title={event.title} description={event.description} />

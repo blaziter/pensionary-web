@@ -26,7 +26,7 @@ const Info = () => {
     });
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/external/info`)
+        axios.get(`${import.meta.env.VITE_API_URL}/employee/all`)
             .then(async res => {
                 setData(await res.data)
             })

@@ -20,7 +20,7 @@ const StaffStatus = () => {
 
     useEffect(() => {
         let finished = false;
-        axios.get(`${import.meta.env.VITE_API_URL}/external/all`)
+        axios.get(`${import.meta.env.VITE_API_URL}/employee/all`)
             .then(async (res) => {
                 setStaff(await res.data);
             });
