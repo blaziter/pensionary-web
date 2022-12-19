@@ -1,8 +1,8 @@
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Menu from "../Menu";
-import Nav from "../Nav";
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Menu from '../Menu';
+import Nav from '../Nav';
 
 const CreateMember = () => {
     const navigate = useNavigate();
@@ -14,11 +14,14 @@ const CreateMember = () => {
         role: '',
         availability: 0,
         shift: '',
-        workplace: ''
+        workplace: '',
+        imagename: ''
     })
     const [errName, setErrName] = useState(false);
     const [errRole, setErrRole] = useState(false);
+    const [errImage, setErrImage] = useState(false);
     const [status, setStatus] = useState('');
+    const [file, setFile] = useState();
 
     const handleChange = (e: any) => {
         setMember({ ...member, [e.target.name]: e.target.value })
@@ -31,6 +34,9 @@ const CreateMember = () => {
         }
         if (member.role === '') {
             setErrRole(true);
+        }
+        if (member.imagename === '') {
+            setErrImage(true);
         }
         console.log(member)
         axios.defaults.withCredentials = true;
@@ -46,6 +52,16 @@ const CreateMember = () => {
             .catch(err => {
                 setStatus('error');
             })
+            const formData = new FormData();
+            formData.append('file', file as any)
+            console.log(formData)
+            axios({
+                method: 'post',
+                url: `${import.meta.env.VITE_API_URL}/image/upload`,
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' },
+                withCredentials: true
+            })
     }
 
     return (
@@ -58,7 +74,7 @@ const CreateMember = () => {
                         <Menu />
                     </div>
                     <div className='column is-10'>
-                        <form className='create-update-container'>
+                        <form className='create-update-container' encType='multipart/form-data'>
                             <div className='field create-field'>
                                 <label className='label'>Akademický titul</label>
                                 <div className='control'>
@@ -82,7 +98,7 @@ const CreateMember = () => {
                                 </div>
                             </div>
                             <div className='field create-field'>
-                            <label className='label'>Role</label>
+                                <label className='label'>Role</label>
                                 <div className='control'>
                                     <input name='role' className={errName ? 'input is-danger' : 'input'} type='text' placeholder='Role' onChange={e => {
                                         setErrRole(false);
@@ -91,10 +107,34 @@ const CreateMember = () => {
                                     } />
                                 </div>
                             </div>
+                            <div className='field create-field image'>
+                                <label className='label'>Obrázek</label>
+                                <div className={errImage ? 'file has-name is-danger' : 'file has-name is-success'}>
+                                    <label className='file-label'>
+                                        <input required className='file-input' type='file' name='imagename' onChange={e => {
+                                            setErrImage(false);
+                                            if (e.target.files) setMember({ ...member, imagename: e.target.files[0].name })
+                                            if (e.target.files) setFile(e.target.files[0] as any)
+                                        }} />
+                                        <span className='file-cta'>
+                                            <span className='file-icon'>
+                                                <i className='fas fa-upload'></i>
+                                            </span>
+                                            <span className='file-label'>
+                                                Choose a file…
+                                            </span>
+                                        </span>
+                                        <span className='file-name'>
+                                            {member.imagename}
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
                         </form>
-                        
+
                         {errName ? <p className='has-text-danger'>Jméno není nastavené!</p> : null}
                         {errRole ? <p className='has-text-danger'>Role není nastavená!</p> : null}
+                        {errImage ? <p className='has-text-danger'>Není vložený žádný obrázek</p> : null}
                         {status == 'success' ? <p className='has-text-success'>Člen týmu byl přidán, přesměrování bude za 3 sekundy</p> : status == 'error' ? <p className='has-text-danger'>Nepodařilo se přidat člena týmu</p> : null}
 
                         <button className='button crud float-right margin-top-10px' onClick={handleSubmit} disabled={status == 'success' ? true : false}>

@@ -6,5 +6,6 @@ export interface Employee {
     role: string,
     availability: number,
     shift: string,
-    workplace: string
+    workplace: string,
+    imagename: string
 }
