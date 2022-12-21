@@ -198,8 +198,8 @@ const Create = () => {
                                                     }}>
                                                         <option value=''>Vybrat oddělení</option>
                                                         <option value='village'>Vesnička</option>
-                                                        <option value='first-floor'>První patro</option>
-                                                        <option value='ground-floor'>Přízemí</option>
+                                                        <option value='first floor'>První patro</option>
+                                                        <option value='ground floor'>Přízemí</option>
                                                     </select>
                                                 </div>
                                             </div>
