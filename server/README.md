@@ -1,4 +1,3 @@
-# topicly
-Social network, modern design, features from twitter/instagram
+# pensionary-web-server
 
-taiga board: https://taiga.thecrimsonbaron.com/project/topicly/kanban
+Social network, modern design, features from twitter/instagram

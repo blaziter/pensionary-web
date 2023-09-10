@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 export const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-    if (req.session.loggedIn) return next();
+  if (req.session.loggedIn) return next();
 
-    return res.status(406).send('Already logged in');
-}
+  return res.status(406).send('Already logged in');
+};
