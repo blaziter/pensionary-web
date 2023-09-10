@@ -41,7 +41,6 @@ const StaffStatus = () => {
 
     return (
         <>
-            {console.log(staff)}
             <div className='status-container has-text-centered font'>
                 <div className='containers directors-container'>
                     <div className='card'>
@@ -88,7 +87,13 @@ const StaffStatus = () => {
                                         <div className="day-title">Denní</div>
                                         <div className="day-body">
                                             {
-                                                
+                                                staff && staff.filter(employee => employee.ROLE == 'general nurse' && employee.SHIFT == 'day' && employee.AVAILABILITY == 1).map(employee => {
+                                                    return (
+                                                        <div className='employee'>
+                                                            <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -96,7 +101,13 @@ const StaffStatus = () => {
                                         <div className="night-title">Noční</div>
                                         <div className="night-body">
                                             {
-
+                                                staff && staff.filter(employee => employee.ROLE == 'general nurse' && employee.SHIFT == 'night' && employee.AVAILABILITY == 1).map(employee => {
+                                                    return (
+                                                        <div className='employee'>
+                                                            <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -108,7 +119,17 @@ const StaffStatus = () => {
                 <div className='containers village'>
                     <div className='card'>
                         <div className='card-header'>
-                            <p>Vesnička</p> <p>Vedoucí oddělení: { }</p>
+                            <p>Vesnička</p> <p>Vedoucí oddělení: {staff.filter(employee => employee.ROLE == 'head nurse' && employee.WORKPLACE == 'village' && employee.AVAILABILITY == 1).map(employee => {
+                                return (
+                                    <>
+                                        {
+                                            <div className='employee'>
+                                                <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                            </div>
+                                        }
+                                    </>
+                                )
+                            })}</p>
                         </div>
                         <div className='card-content'>
                             <div className="content">
@@ -119,7 +140,13 @@ const StaffStatus = () => {
                                                 <div className="day-title">Denní</div>
                                                 <div className="day-body">
                                                     {
-
+                                                        staff && staff.filter(employee => employee.ROLE == 'nurse' && employee.SHIFT == 'day' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'village').map(employee => {
+                                                            return (
+                                                                <div className='employee'>
+                                                                    <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                                </div>
+                                                            )
+                                                        })
                                                     }
                                                 </div>
                                             </div>
@@ -129,7 +156,13 @@ const StaffStatus = () => {
                                         <div className="night-title">Noční</div>
                                         <div className="night-body">
                                             {
-
+                                                staff && staff.filter(employee => employee.ROLE == 'nurse' && employee.SHIFT == 'night' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'village').map(employee => {
+                                                    return (
+                                                        <div className='employee'>
+                                                            <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -141,7 +174,13 @@ const StaffStatus = () => {
                 <div className='containers first-floor'>
                     <div className='card is-warning'>
                         <div className='card-header'>
-                            <p>1. patro</p> <p>Vedoucí oddělení: { }</p>
+                            <p>1. patro</p> <p>Vedoucí oddělení: {staff.filter(employee => employee.ROLE == 'head nurse' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'first floor').map(employee => {
+                                return (
+                                    <div className='employee'>
+                                        <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                    </div>
+                                )
+                            })}</p>
                         </div>
                         <div className='card-content'>
                             <div className="content">
@@ -150,7 +189,13 @@ const StaffStatus = () => {
                                         <div className="day-title">Denní</div>
                                         <div className="day-body">
                                             {
-
+                                                staff && staff.filter(employee => employee.ROLE == 'nurse' && employee.SHIFT == 'day' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'first floor').map(employee => {
+                                                    return (
+                                                        <div className='employee'>
+                                                            <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -158,7 +203,13 @@ const StaffStatus = () => {
                                         <div className="night-title">Noční</div>
                                         <div className="night-body">
                                             {
-
+                                                staff && staff.filter(employee => employee.ROLE == 'nurse' && employee.SHIFT == 'night' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'first floor').map(employee => {
+                                                    return (
+                                                        <div className='employee'>
+                                                            <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -170,7 +221,13 @@ const StaffStatus = () => {
                 <div className='containers ground-floor'>
                     <div className='card'>
                         <div className='card-header'>
-                            <p>Přízemí</p> <p>Vedoucí oddělení: { }</p>
+                            <p>Přízemí</p> <p>Vedoucí oddělení: {staff.filter(employee => employee.ROLE == 'head nurse' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'ground floor').map(employee => {
+                                return (
+                                    <div className='employee'>
+                                        <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                    </div>
+                                )
+                            })}</p>
                         </div>
                         <div className='card-content'>
                             <div className="content">
@@ -178,14 +235,26 @@ const StaffStatus = () => {
                                     <div className="card status-items">
                                         <div className="day-title">Denní</div>
                                         {
-
+                                            staff && staff.filter(employee => employee.ROLE == 'nurse' && employee.SHIFT == 'day' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'ground floor').map(employee => {
+                                                return (
+                                                    <div className='employee'>
+                                                        <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                    </div>
+                                                )
+                                            })
                                         }
                                     </div>
                                     <div className="card status-items">
                                         <div className="night-title">Noční</div>
                                         <div className="night-body">
                                             {
-
+                                                staff && staff.filter(employee => employee.ROLE == 'nurse' && employee.SHIFT == 'night' && employee.AVAILABILITY == 1 && employee.WORKPLACE == 'ground floor').map(employee => {
+                                                    return (
+                                                        <div className='employee'>
+                                                            <p className='employee-text'>{employee.PREFIX} {employee.NAME.split(' ')[0].charAt(0)}. {employee.NAME.split(' ')[1]} {employee.SUFFIX}</p>
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                     </div>
@@ -199,35 +268,5 @@ const StaffStatus = () => {
         </>
     );
 }
-
-/* * headmasters
-{
-    staff.map(employee => {
-        let names = employee.name.split(' ');
-        return (
-            <>
-                <div className='employee'>
-                    <p className='employee-text'>{employee.role}</p>
-                    <p className='employee-text'>{employee.prefix} {names[0].charAt(0). names[1]} {employee.suffix}</p>
-                    <p className={employee.availability ? 'employee-text available' : 'employee-text unavailable'}>{employee.availability ? 'Dostupný' : 'Nedostupný'}</p> {employee.availability ? <BsCheckLg className='employee-text available' size='1.5em' /> : null}
-                </div>
-            </>
-        );
-    })
-}
-*/
-/* * nurses
-{
-    staff.map(employee => {
-        return (
-            <>
-                <div className='employee'>
-                    <p className='employee-text'>{employee.firstName.charAt(0)}. {employee.lastName} {employee.suffix}</p>
-                </div>
-            </>
-        );
-    })
-}
-*/
 
 export default StaffStatus;

@@ -1,5 +1,5 @@
 import express from 'express';
-import multer, { diskStorage } from 'multer';
+import { upload, uploadFile } from '../controllers/image.controller';
 
 const router = express.Router();
 
